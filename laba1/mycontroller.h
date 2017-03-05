@@ -37,6 +37,8 @@ private slots:
 
     void on_moveButton_clicked();
 
+    void on_fileButton_clicked();
+
 private:
 
     double *GetData(vector <QLineEdit*> &vec);

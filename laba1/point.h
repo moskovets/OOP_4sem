@@ -14,11 +14,11 @@ typedef double t_vect[N_DIMEN];
 
 void GetResultMatrix(t_matrix a, const Rotate &act);
 
-void Rotate_point_arr(Point arr[], const int N_arr, const Rotate &act);
+void Rotate_point_arr(Point* arr, const int N_arr, const Rotate &act);
 
-void Scale_point_arr(Point arr[], const int N_arr, const Scale &act);
+void Scale_point_arr(Point* arr, const int N_arr, const Scale &act);
 
-void Move_point_arr(Point arr[], const int N_arr, const Rotate &act);
+void Move_point_arr(Point* arr, const int N_arr, const Move &act);
 
 static void Mult(t_vect vec, const t_matrix a);
 

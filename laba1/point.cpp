@@ -39,7 +39,7 @@ void GetResultMatrix(t_matrix a, const Rotate &act)
 
 
 
-void Rotate_point_arr(Point arr[], const int N_arr, Rotate &act)
+void Rotate_point_arr(Point* arr, const int N_arr, Rotate &act)
 {
     t_matrix m;
     GetResultMatrix(m, act);
@@ -56,12 +56,12 @@ void Rotate_point_arr(Point arr[], const int N_arr, Rotate &act)
     }
 }
 
-void Scale_point_arr(Point arr[], const int N_arr, const Scale &act)
+void Scale_point_arr(Point* arr, const int N_arr, const Scale &act)
 {
     //TODO
 }
 
-void Move_point_arr(Point arr[], const int N_arr, const Rotate &act)
+void Move_point_arr(Point* arr, const int N_arr, const Move &act)
 {
     //TODO
 }

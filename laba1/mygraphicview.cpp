@@ -17,13 +17,36 @@ MyGraphicView::MyGraphicView(QWidget *parent) :
     group_1 = new QGraphicsItemGroup(); // Группа для отрисовки прямоугольника
 
     scene->addItem(group_1);
+    Model mod;
+    Paint(mod);
 
     ui->setupUi(this);
 }
 
 
 void MyGraphicView::Paint(Model &model) {
-    //TODO
+    this->deleteItemsFromGroup(group_1);
+    int width = this->width();
+    int height = this->height();
+
+    /* Устанавливаем размер сцены по размеру виджета
+     * Первая координата - это левый верхний угол,
+     * а Вторая - это правый нижний угол
+     * */
+    scene->setSceneRect(0,0,width,height);
+
+    QPen penBlack(Qt::black); // Задаём чёрную кисть
+
+    double cx = width/2;
+    double cy = height/2;
+    group_1->addToGroup(scene->addLine(cx + 30, cy - 20,
+            cx - 100, cy - 50, penBlack));
+
+/*    for(int i = 0; i < model.N_e; i++) {
+        group_1->addToGroup(scene->addLine(cx + model.vertex[model.edge[0]-1].x, cy - model.vertex[model.edge[0]-1].y,
+                cx + model.vertex[model.edge[1]-1].x, cy - model.vertex[model.edge[1]-1].y, penBlack));
+    }
+*/
 }
 
 MyGraphicView::~MyGraphicView()

@@ -2,8 +2,9 @@
 #include "ui_mycontroller.h"
 #include <QRegExpValidator>
 #include <QIntValidator>
-
+#include <QFileDialog>
 #include <iostream>
+#include <string.h>
 #define MIN_PAR 10
 Text_Error LineEditError;
 
@@ -133,3 +134,15 @@ void MyController::on_moveButton_clicked()
     emit AnswerChange(model);
 }
 
+
+void MyController::on_fileButton_clicked()
+{
+    QString str = QFileDialog::getOpenFileName(0, "Open Dialog", "", "*.txt");
+    if(str == "")
+        return;
+    t_action act;
+    strcpy(act.creat.fileName, str.toStdString().c_str());
+    main_controller(model, act, CREATE);
+
+    emit AnswerChange(model);
+}
