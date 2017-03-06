@@ -3,6 +3,7 @@
 
 #include "action.h"
 #include <math.h>
+#include <fstream>
 #define  N_DIMEN 3 //DIMENSIONALITY
 struct Point {
     double x;
@@ -24,4 +25,5 @@ static void Mult(t_vect vec, const t_matrix a);
 
 static void Mult_matrix(t_matrix res, const t_matrix a, const t_matrix b);
 
+int Download_point_arr(std::ifstream &inp, Point* arr, const int N);
 #endif // POINT_H

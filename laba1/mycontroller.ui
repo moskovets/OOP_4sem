@@ -235,6 +235,9 @@
          <height>21</height>
         </rect>
        </property>
+       <property name="text">
+        <string>0</string>
+       </property>
       </widget>
       <widget class="QLabel" name="label_5">
        <property name="geometry">
@@ -276,6 +279,9 @@
          <height>21</height>
         </rect>
        </property>
+       <property name="text">
+        <string>0</string>
+       </property>
       </widget>
       <widget class="QLineEdit" name="kzEdit">
        <property name="geometry">
@@ -285,6 +291,9 @@
          <width>61</width>
          <height>21</height>
         </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_12">
@@ -368,6 +377,9 @@
          <height>21</height>
         </rect>
        </property>
+       <property name="text">
+        <string>0</string>
+       </property>
       </widget>
       <widget class="QLabel" name="label_15">
        <property name="geometry">
@@ -396,6 +408,9 @@
          <height>21</height>
         </rect>
        </property>
+       <property name="text">
+        <string>0</string>
+       </property>
       </widget>
       <widget class="QLineEdit" name="dyEdit">
        <property name="geometry">
@@ -405,6 +420,9 @@
          <width>61</width>
          <height>21</height>
         </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
        </property>
       </widget>
       <widget class="QPushButton" name="moveButton">

@@ -1,6 +1,6 @@
 #include "mygraphicview.h"
 #include "ui_mygraphicview.h"
-
+#include <iostream>
 
 MyGraphicView::MyGraphicView(QWidget *parent) :
      QGraphicsView(parent),
@@ -39,14 +39,20 @@ void MyGraphicView::Paint(Model &model) {
 
     double cx = width/2;
     double cy = height/2;
-    group_1->addToGroup(scene->addLine(cx + 30, cy - 20,
-            cx - 100, cy - 50, penBlack));
+   //group_1->addToGroup(scene->addLine(cx + 30, cy - 20,
+   //         cx - 100, cy - 50, penBlack));
+   // std::cout << model.N_e << std::endl;
 
-/*    for(int i = 0; i < model.N_e; i++) {
-        group_1->addToGroup(scene->addLine(cx + model.vertex[model.edge[0]-1].x, cy - model.vertex[model.edge[0]-1].y,
-                cx + model.vertex[model.edge[1]-1].x, cy - model.vertex[model.edge[1]-1].y, penBlack));
+    for(int i = 0; i < model.N_e; i++) {
+       // std::cout << model.edge[i][0] << " " << cx + model.vertex[model.edge[i][0]].x << " "
+       //           << (cy - model.vertex[model.edge[i][0]].y) << "  ";
+       // std::cout << model.edge[i][1] << " " << cx + model.vertex[model.edge[i][1]].x << " "
+       //           << (cy - model.vertex[model.edge[i][1]].y) << " " << std::endl;
+        group_1->addToGroup(scene->addLine(
+                cx + model.vertex[model.edge[i][0]].x, cy - model.vertex[model.edge[i][0]].y,
+                cx + model.vertex[model.edge[i][1]].x, cy - model.vertex[model.edge[i][1]].y, penBlack));
     }
-*/
+
 }
 
 MyGraphicView::~MyGraphicView()

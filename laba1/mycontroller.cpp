@@ -115,7 +115,11 @@ void MyController::on_rotateButton_clicked()
         return;
 
     t_action act;
-    //TODO
+
+    act.rotat.x_angle = data[0] * M_PI / 180;
+    act.rotat.y_angle = data[1] * M_PI / 180;
+    act.rotat.z_angle = data[2] * M_PI / 180;
+
     main_controller(model, act, ROTATE);
 
     emit AnswerChange(model);
@@ -130,7 +134,27 @@ void MyController::on_scaleButton_clicked()
 
 void MyController::on_moveButton_clicked()
 {
-    //TODO
+    vector<QLineEdit*> edits;
+    edits.push_back(ui->dxEdit);
+    edits.push_back(ui->dyEdit);
+    edits.push_back(ui->dzEdit);
+
+    double *data = GetData(edits);
+
+    if(LineEditError != NO_ER)
+        return;
+
+    if(model.N_v == 0)
+        return;
+
+    t_action act;
+
+    act.mov.dx = data[0];
+    act.mov.dy = data[1];
+    act.mov.dz = data[2];
+
+    main_controller(model, act, MOVE);
+
     emit AnswerChange(model);
 }
 

@@ -1,4 +1,22 @@
 #include "point.h"
+int Download_point_arr(std::ifstream &inp, Point* arr, const int N)
+{
+    int x, y, z;
+    int flag = 0;
+    for(int i = 0; i < N; i++) {
+        if(inp >> x && inp >> y && inp >> z) {
+            arr[i].x = x;
+            arr[i].y = y;
+            arr[i].z = z;
+        }
+        else {
+            flag = 1;
+        }
+    }
+    return flag;
+}
+
+
 static void Mult(t_vect vec, const t_matrix a)
 {
     t_vect res = {0};
@@ -16,7 +34,10 @@ static void Mult_matrix(t_matrix res, const t_matrix a, const t_matrix b)
 {
     for(int i = 0; i < N_DIMEN; i++) {
         for(int j = 0; j < N_DIMEN; j++) {
-            res[i][j] = a[i][j] * b[j][i];
+            res[i][j] = 0;
+            for(int k = 0; k < N_DIMEN; k++) {
+                res[i][j] += a[i][k] * b[k][j];
+            }
         }
     }
 }
@@ -35,11 +56,12 @@ void GetResultMatrix(t_matrix a, const Rotate &act)
     t_matrix tmp;
     Mult_matrix(tmp, ax, ay);
     Mult_matrix(a, tmp, az);
+
 }
 
 
 
-void Rotate_point_arr(Point* arr, const int N_arr, Rotate &act)
+void Rotate_point_arr(Point* arr, const int N_arr, const Rotate &act)
 {
     t_matrix m;
     GetResultMatrix(m, act);
@@ -63,5 +85,9 @@ void Scale_point_arr(Point* arr, const int N_arr, const Scale &act)
 
 void Move_point_arr(Point* arr, const int N_arr, const Move &act)
 {
-    //TODO
+    for(int i = 0; i < N_arr; ++i) {
+        arr[i].x += act.dx;
+        arr[i].y += act.dy;
+        arr[i].z += act.dz;
+    }
 }
