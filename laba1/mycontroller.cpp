@@ -127,7 +127,27 @@ void MyController::on_rotateButton_clicked()
 
 void MyController::on_scaleButton_clicked()
 {
-    //TODO
+    vector<QLineEdit*> edits;
+    edits.push_back(ui->kxEdit);
+    edits.push_back(ui->kyEdit);
+    edits.push_back(ui->kzEdit);
+
+    double *data = GetData(edits);
+
+    if(LineEditError != NO_ER)
+        return;
+
+    if(model.N_v == 0)
+        return;
+
+    t_action act;
+
+    act.scal.kx = data[0];
+    act.scal.ky = data[1];
+    act.scal.kz = data[2];
+
+    main_controller(model, act, SCALE);
+
     emit AnswerChange(model);
 
 }
@@ -166,7 +186,43 @@ void MyController::on_fileButton_clicked()
         return;
     t_action act;
     strcpy(act.creat.fileName, str.toStdString().c_str());
-    main_controller(model, act, CREATE);
-
+    int res = main_controller(model, act, CREATE);
+    QString mess = "";
+    if(res == FILE_NOT_FIND) {
+        mess = "Cannot open file";
+    } else if(res == FILE_ERROR) {
+        mess = "Error format of data";
+    }
+    if(mess != "") {
+        QErrorMessage errorMessage;
+        errorMessage.showMessage(mess);
+        errorMessage.exec();
+        return;
+    }
     emit AnswerChange(model);
+}
+
+
+void MyController::on_saveButton_clicked()
+{
+    QString str = QFileDialog::getSaveFileName(0, "Save Dialog", "", "*.txt");
+    if(str == "")
+        return;
+    t_action act;
+    strcpy(act.creat.fileName, str.toStdString().c_str());
+    int res = main_controller(model, act, SAVE);
+    QString mess = "";
+    if(res == FILE_NOT_FIND) {
+        mess = "Cannot open file";
+    } else if(res == FILE_ERROR) {
+        mess = "Error format of data";
+    }
+    if(mess != "") {
+        QErrorMessage errorMessage;
+        errorMessage.showMessage(mess);
+        errorMessage.exec();
+        return;
+    }
+    //emit AnswerChange(model);
+
 }

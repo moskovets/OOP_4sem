@@ -36,6 +36,13 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
+     <widget class="QPushButton" name="saveButton">
+      <property name="text">
+       <string>Сохранить модель</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QGroupBox" name="groupBox">
       <property name="font">
        <font>
@@ -48,8 +55,8 @@
       <widget class="QLabel" name="label_2">
        <property name="geometry">
         <rect>
-         <x>11</x>
-         <y>31</y>
+         <x>67</x>
+         <y>30</y>
          <width>41</width>
          <height>21</height>
         </rect>
@@ -66,8 +73,8 @@
       <widget class="QLabel" name="label_3">
        <property name="geometry">
         <rect>
-         <x>12</x>
-         <y>69</y>
+         <x>67</x>
+         <y>60</y>
          <width>41</width>
          <height>21</height>
         </rect>
@@ -81,30 +88,11 @@
         <string>y</string>
        </property>
       </widget>
-      <widget class="QSlider" name="xhorizontalSlider">
-       <property name="geometry">
-        <rect>
-         <x>31</x>
-         <y>33</y>
-         <width>160</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="maximum">
-        <number>359</number>
-       </property>
-       <property name="sliderPosition">
-        <number>180</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
       <widget class="QLineEdit" name="rot_xEdit">
        <property name="geometry">
         <rect>
-         <x>194</x>
-         <y>31</y>
+         <x>112</x>
+         <y>30</y>
          <width>51</width>
          <height>21</height>
         </rect>
@@ -116,40 +104,21 @@
       <widget class="QLineEdit" name="rot_yEdit">
        <property name="geometry">
         <rect>
-         <x>194</x>
-         <y>70</y>
+         <x>112</x>
+         <y>60</y>
          <width>51</width>
          <height>21</height>
         </rect>
        </property>
        <property name="text">
         <string>0</string>
-       </property>
-      </widget>
-      <widget class="QSlider" name="yhorizontalSlider">
-       <property name="geometry">
-        <rect>
-         <x>31</x>
-         <y>74</y>
-         <width>160</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="maximum">
-        <number>359</number>
-       </property>
-       <property name="sliderPosition">
-        <number>180</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
       <widget class="QLineEdit" name="rot_zEdit">
        <property name="geometry">
         <rect>
-         <x>194</x>
-         <y>108</y>
+         <x>112</x>
+         <y>90</y>
          <width>51</width>
          <height>21</height>
         </rect>
@@ -158,30 +127,11 @@
         <string>0</string>
        </property>
       </widget>
-      <widget class="QSlider" name="zhorizontalSlider">
-       <property name="geometry">
-        <rect>
-         <x>31</x>
-         <y>111</y>
-         <width>160</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="maximum">
-        <number>359</number>
-       </property>
-       <property name="sliderPosition">
-        <number>180</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
       <widget class="QLabel" name="label_4">
        <property name="geometry">
         <rect>
-         <x>13</x>
-         <y>106</y>
+         <x>67</x>
+         <y>90</y>
          <width>41</width>
          <height>21</height>
         </rect>
@@ -198,8 +148,8 @@
       <widget class="QPushButton" name="rotateButton">
        <property name="geometry">
         <rect>
-         <x>167</x>
-         <y>139</y>
+         <x>86</x>
+         <y>121</y>
          <width>81</width>
          <height>23</height>
         </rect>

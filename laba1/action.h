@@ -2,7 +2,7 @@
 #define ACTION_H
 
 #define FILE_NAME_SIZE 200
-enum ERRORS { FILE_NOT_FIND, FILE_ERROR };
+enum ERRORS { OK, FILE_NOT_FIND, FILE_ERROR };
 
 struct Rotate {
     double x_angle;

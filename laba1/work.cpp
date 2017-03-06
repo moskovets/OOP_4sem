@@ -20,6 +20,8 @@ int main_controller(Model &model, const t_action &act, type_action t)
     case FREE:
         Free_model(model);
         break;
+    case SAVE:
+        return SaveModel(model, act.creat);
     default:
         return -1;
     }

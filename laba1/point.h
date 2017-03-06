@@ -15,6 +15,8 @@ typedef double t_vect[N_DIMEN];
 
 void GetResultMatrix(t_matrix a, const Rotate &act);
 
+//void GetResultMatrix(t_matrix a, const Scale &act);
+
 void Rotate_point_arr(Point* arr, const int N_arr, const Rotate &act);
 
 void Scale_point_arr(Point* arr, const int N_arr, const Scale &act);
@@ -26,4 +28,5 @@ static void Mult(t_vect vec, const t_matrix a);
 static void Mult_matrix(t_matrix res, const t_matrix a, const t_matrix b);
 
 int Download_point_arr(std::ifstream &inp, Point* arr, const int N);
+void Save_point_arr(std::ofstream &out, const Point* arr, const int N);
 #endif // POINT_H

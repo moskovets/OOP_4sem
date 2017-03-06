@@ -1,7 +1,7 @@
 #include "point.h"
 int Download_point_arr(std::ifstream &inp, Point* arr, const int N)
 {
-    int x, y, z;
+    double x, y, z;
     int flag = 0;
     for(int i = 0; i < N; i++) {
         if(inp >> x && inp >> y && inp >> z) {
@@ -14,6 +14,13 @@ int Download_point_arr(std::ifstream &inp, Point* arr, const int N)
         }
     }
     return flag;
+}
+void Save_point_arr(std::ofstream &out, const Point* arr, const int N)
+{
+    for(int i = 0; i < N; i++) {
+        out << arr[i].x << " " << " " << arr[i].y << " " <<
+               arr[i].z << "\n";
+    }
 }
 
 
@@ -60,7 +67,6 @@ void GetResultMatrix(t_matrix a, const Rotate &act)
 }
 
 
-
 void Rotate_point_arr(Point* arr, const int N_arr, const Rotate &act)
 {
     t_matrix m;
@@ -80,7 +86,19 @@ void Rotate_point_arr(Point* arr, const int N_arr, const Rotate &act)
 
 void Scale_point_arr(Point* arr, const int N_arr, const Scale &act)
 {
-    //TODO
+    t_matrix m = { { act.kx, 0, 0 },
+                   { 0, act.ky, 0 },
+                   { 0, 0, act.kz } };
+    t_vect vec;
+    for(int i = 0; i < N_arr; ++i) {
+        vec[0] = arr[i].x;
+        vec[1] = arr[i].y;
+        vec[2] = arr[i].z;
+        Mult(vec, m);
+        arr[i].x = vec[0];
+        arr[i].y = vec[1];
+        arr[i].z = vec[2];
+    }
 }
 
 void Move_point_arr(Point* arr, const int N_arr, const Move &act)
