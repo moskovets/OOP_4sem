@@ -29,20 +29,9 @@ public:
     void Connect();
 signals:
     void SendScene(My_Scene* my_scene);
-private slots:
-    //void ChangeScene();
 private:
-    //void resizeEvent(QResizeEvent *event);
-
     Ui::MyGraphicView *ui;
     My_Scene my_scene;
-
-
-    QGraphicsScene      *scene;     // Объявляем сцену для отрисовки
-    QGraphicsItemGroup  *group_1;   // Объявляем первую группу элементов
-
-    void deleteItemsFromScene();
-
 };
 
 #endif // MYGRAPHICVIEW_H

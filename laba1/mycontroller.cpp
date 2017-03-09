@@ -19,11 +19,6 @@ MyController::MyController(QWidget *parent) :
 
     par = parent;
     ui->setupUi(this);
-    //scene.scene = new QGraphicsScene();
-    //emit SceneChange(scene.scene);
-    //scene = new QGraphicsScene();
-    //ui->aEdit->setValidator(new QIntValidator(11, 1000));
-    //ui->bEdit->setValidator(new QIntValidator(11, 1000));
     ui->dxEdit->setValidator(new QRegExpValidator(QRegExp("^[+-]?[0-9]{0,5}(\\.|,|$)[0-9]{0,4}$")));
     ui->dyEdit->setValidator(new QRegExpValidator(QRegExp("^[+-]?[0-9]{0,5}(\\.|,|$)[0-9]{0,4}$")));
     ui->dzEdit->setValidator(new QRegExpValidator(QRegExp("^[+-]?[0-9]{0,5}(\\.|,|$)[0-9]{0,4}$")));
@@ -36,7 +31,6 @@ MyController::MyController(QWidget *parent) :
 }
 void MyController::GetScene(My_Scene *scene1) {
     this->scene.x_center = scene1->x_center;
-    cout << scene.x_center << "sdf" << endl;
     this->scene.y_center = scene1->y_center;
     this->scene.scene = scene1->scene;
 }
@@ -45,7 +39,7 @@ MyController::~MyController()
 {
     t_action act;
     act.free = true;
-   // main_controller(model, act, FREE);
+    main_controller(scene, act, FREE);
     delete ui;
 }
 
@@ -112,10 +106,6 @@ double Analiz_Text(QString str)
 
 void MyController::on_rotateButton_clicked()
 {
-    //scene.addLine(100, 100, 200, 200);
-    //emit SceneChange(scene);
-
-
     if(model.N_v == 0)
         return;
 
@@ -138,14 +128,10 @@ void MyController::on_rotateButton_clicked()
 
     main_controller(scene, act, ROTATE);
     main_controller(scene, act, DRAW);
-
-    //emit AnswerChange(model);
 }
 
 void MyController::on_scaleButton_clicked()
 {
-    //scene.addLine(100, 0, 200, 200);
-
     if(model.N_v == 0)
         return;
 
@@ -159,18 +145,14 @@ void MyController::on_scaleButton_clicked()
     if(LineEditError != NO_ER)
         return;
 
-
     t_action act;
 
     act.scal.kx = data[0];
     act.scal.ky = data[1];
     act.scal.kz = data[2];
 
-//    main_controller(scene, act, SCALE);
     main_controller(scene, act, SCALE);
     main_controller(scene, act, DRAW);
-
-    //emit AnswerChange(model);
 
 }
 
@@ -196,17 +178,13 @@ void MyController::on_moveButton_clicked()
     act.mov.dy = data[1];
     act.mov.dz = data[2];
 
-    //main_controller(model, act, MOVE);
-
-    //emit AnswerChange(model);
+    main_controller(scene, act, MOVE);
+    main_controller(scene, act, DRAW);
 }
 
 
 void MyController::on_fileButton_clicked()
 {
-    //scene.x_center = scene.scene->sceneRect().width() / 2;
-    //scene.y_center = scene.scene->height() / 2;
-    cout << scene.x_center << " " << endl;
 
     QString str = QFileDialog::getOpenFileName(0, "Open Dialog", "", "*.txt");
     if(str == "")
@@ -228,11 +206,7 @@ void MyController::on_fileButton_clicked()
         errorMessage.exec();
         return;
     }
-    //scene.scene->addLine(100, 200, 0, 0);
-    //    emit SceneChange(scene.scene);
     main_controller(scene, act, DRAW);
-        emit SceneChange(scene.scene);
-    //emit AnswerChange(model);
 }
 
 
@@ -259,7 +233,4 @@ void MyController::on_saveButton_clicked()
         errorMessage.exec();
         return;
     }
-
-    //emit AnswerChange(model);
-
 }

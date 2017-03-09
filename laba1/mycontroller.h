@@ -42,8 +42,6 @@ private slots:
 
     void on_fileButton_clicked();
 
-    //void on_xhorizontalSlider_valueChanged(int value);
-
     void on_saveButton_clicked();
 
 private:
