@@ -1,10 +1,14 @@
 #include "model_action.h"
 
 #include "point.h"
+#include "edges.h"
+
 #include "errors.h"
 #include <fstream>
 #include <stdlib.h>
 #include <iostream>
+#include "draw_on_scene.h"
+int Copy_model(Model &model, Model &copy);
 int Rotate_model(Model &model, const Rotate &act) {
     Rotate_point_arr(model.vertex, model.N_v, act);
     return 0;
@@ -25,77 +29,51 @@ int SaveModel(const Model &model, const Create &act) {
     if(!out) {
         return FILE_NOT_FIND;
     }
+    int ret = 0;
 
-    out << model.N_v << " " << model.N_e << "\n";
+    ret = Save_point_arr(out, model.vertex, model.N_v);
+    if(!ret)
+        ret = Save_edge_arr(out, model.edge, model.N_e);
 
-    Save_point_arr(out, model.vertex, model.N_v);
-
-    for(int i = 0; i < model.N_e; i++) {
-        out << model.edge[i][0] + 1 << " "
-            << model.edge[i][1] + 1 << "\n";
-    }
-    return 0;
+    out.close();
+    return ret;
 
 }
 //int Download_edge_arr(model, )
 
 
 int DownloadModel(Model &model, const Create &act) {
-    Free_model(model);
+//    Free_model(model);
     std::ifstream inp;
     inp.open(act.fileName);
     if(!inp) {
         return FILE_NOT_FIND;
     }
-
-    int N, M;
-    int a, b;
-    int flag = 0;
-
-    inp >> N >> M;
-    model.N_e = M;
-    model.N_v = N;
-    int res = Create_model(model, N, M);
-    if(res == 1) {
-        return MEMORY_ERROR;
-    }
-
-    flag = Download_point_arr(inp, model.vertex, N);
-
-    if(flag == 1) {
-        Free_model(model);
-        return FILE_ERROR;
-    }
-
-    for(int i = 0; i < M; i++) {
-        if(inp >> a && inp >> b) {
-            if(a <= N && b <= N) {
-                model.edge[i][0] = a-1;
-                model.edge[i][1] = b-1;
-            }
-            else {
-                flag = 1;
-
-            }
-        }
-        else {
-            flag = 1;
-        }
-    }
-    if(flag == 1) {
-        Free_model(model);
-        return FILE_ERROR;
-    }
+    Model buff;
+    int ret = 0;
+    ret = Load_point_arr(inp, &buff.vertex, buff.N_v);
+    if(!ret)
+        ret = Load_edge_arr(inp, &buff.edge, buff.N_e);
+    if(!ret)
+        ret = Free_model(model);
+    if(!ret)
+        ret = Copy_model(model, buff);
+    inp.close();
+    return ret;
+}
+int Copy_model(Model &model, Model &copy) {
+    model.N_e = copy.N_e;
+    model.N_v = copy.N_v;
+    model.vertex = copy.vertex;
+    model.edge = copy.edge;
     return 0;
 }
 
 int Free_model(Model &model) {
     model.N_e = 0;
     model.N_v = 0;
-    if(model.edge)
-        delete[] model.edge;
-    if(model.vertex)
-        delete[] model.vertex;
+    Free_Edge_arr(&model.edge);
+    Free_Point_arr(&model.vertex);
     return 0;
 }
 
@@ -114,6 +92,7 @@ int Create_model(Model &model, const int N_v, const int N_e) {
 int Draw_model(My_Scene &scene, const Model &model) {
     if(model.N_v == 0)
         return MODEL_EMPTY;
+    Clean_Scene(scene);
     int res;
     for(int i = 0; i < model.N_e; i++) {
         res = Draw_line(scene, model.vertex[model.edge[i][0]], model.vertex[model.edge[i][1]]);

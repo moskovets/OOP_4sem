@@ -21,7 +21,6 @@ int Clean_Scene(My_Scene &scene) {
     if(!scene.scene) {
         return SCENE_NOT_FOUND;
     }
-    foreach( QGraphicsItem *item, scene.scene->items()) {
-       delete item;
-    }
+    scene.scene->clear();
+    return 0;
 }

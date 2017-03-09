@@ -1,29 +1,67 @@
 #include "point.h"
 #include "draw_on_scene.h"
-int Download_point_arr(std::ifstream &inp, Point* arr, const int N)
+#include "errors.h"
+int Load_point_arr(std::ifstream &inp, Point** arr, int &N)
+{
+    if(!(inp >> N)) {
+        return FILE_ERROR;
+    }
+    int ret = 0;
+    ret = Allocate_Point_arr(arr, N);
+    //arr[0].x = 1;
+
+    for(int i = 0; i < N && !ret; i++) {
+        ret = Load_point(inp, (*arr)[i]);
+        if(ret) {
+            Free_Point_arr(arr);
+        }
+    }
+    return ret;
+}
+int Load_point(std::ifstream &inp, Point& p)
 {
     double x, y, z;
-    int flag = 0;
-    for(int i = 0; i < N; i++) {
-        if(inp >> x && inp >> y && inp >> z) {
-            arr[i].x = x;
-            arr[i].y = y;
-            arr[i].z = z;
-        }
-        else {
-            flag = 1;
-        }
+    if(inp >> x && inp >> y && inp >> z) {
+        p.x = x;
+        p.y = y;
+        p.z = z;
     }
-    return flag;
+    else {
+        return FILE_ERROR;
+    }
+    return 0;
 }
-void Save_point_arr(std::ofstream &out, const Point* arr, const int N)
-{
-    for(int i = 0; i < N; i++) {
-        out << arr[i].x << " " << " " << arr[i].y << " " <<
-               arr[i].z << "\n";
-    }
+int Allocate_Point_arr(Point **arr, const int N) {
+    *arr = new Point [N];
+    if(!(*arr))
+        return MEMORY_ERROR;
+    //arr[0].x = 0;
+    return 0;
+}
+int Free_Point_arr(Point** arr) {
+    if(*arr)
+        delete[] *arr;
+    return 0;
 }
 
+int Save_point_arr(std::ofstream &out, const Point* arr, const int N)
+{
+    if(!out)
+        return FILE_NOT_FIND;
+    out << N << std::endl;
+    for(int i = 0; i < N; i++) {
+        Save_point(out, arr[i]);
+    }
+    return 0;
+}
+
+int Save_point(std::ofstream &out, const Point& p)
+{
+    if(!out)
+        return FILE_NOT_FIND;
+    out << p.x << " " << p.y << " " << p.z << std::endl;
+    return 0;
+}
 
 void Mult(t_vect vec, const t_matrix a)
 {

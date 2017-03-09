@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     mycontroller.cpp \
     point.cpp \
     model_action.cpp \
-    draw_on_scene.cpp
+    draw_on_scene.cpp \
+    edges.cpp
 
 HEADERS  += mainwindow.h \
     mygraphicview.h \
@@ -31,7 +32,8 @@ HEADERS  += mainwindow.h \
     model_action.h \
     my_scene.h \
     draw_on_scene.h \
-    errors.h
+    errors.h \
+    edges.h
 
 FORMS    += mainwindow.ui \
     mygraphicview.ui \

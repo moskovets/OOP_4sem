@@ -106,8 +106,6 @@ double Analiz_Text(QString str)
 
 void MyController::on_rotateButton_clicked()
 {
-    if(model.N_v == 0)
-        return;
 
     vector<QLineEdit*> edits;
     edits.push_back(ui->rot_xEdit);
@@ -132,8 +130,6 @@ void MyController::on_rotateButton_clicked()
 
 void MyController::on_scaleButton_clicked()
 {
-    if(model.N_v == 0)
-        return;
 
     vector<QLineEdit*> edits;
     edits.push_back(ui->kxEdit);
@@ -158,8 +154,6 @@ void MyController::on_scaleButton_clicked()
 
 void MyController::on_moveButton_clicked()
 {
-    if(model.N_v == 0)
-        return;
 
     vector<QLineEdit*> edits;
     edits.push_back(ui->dxEdit);
@@ -212,8 +206,6 @@ void MyController::on_fileButton_clicked()
 
 void MyController::on_saveButton_clicked()
 {
-    if(model.N_v == 0)
-        return;
 
     QString str = QFileDialog::getSaveFileName(0, "Save Dialog", "", "*.txt");
     if(str == "")
