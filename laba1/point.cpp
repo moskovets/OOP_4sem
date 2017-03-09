@@ -1,4 +1,5 @@
 #include "point.h"
+#include "draw_on_scene.h"
 int Download_point_arr(std::ifstream &inp, Point* arr, const int N)
 {
     double x, y, z;
@@ -24,7 +25,7 @@ void Save_point_arr(std::ofstream &out, const Point* arr, const int N)
 }
 
 
-static void Mult(t_vect vec, const t_matrix a)
+void Mult(t_vect vec, const t_matrix a)
 {
     t_vect res = {0};
     for(int i = 0; i < N_DIMEN; i++) {
@@ -37,7 +38,7 @@ static void Mult(t_vect vec, const t_matrix a)
     }
 }
 
-static void Mult_matrix(t_matrix res, const t_matrix a, const t_matrix b)
+void Mult_matrix(t_matrix res, const t_matrix a, const t_matrix b)
 {
     for(int i = 0; i < N_DIMEN; i++) {
         for(int j = 0; j < N_DIMEN; j++) {
@@ -108,4 +109,9 @@ void Move_point_arr(Point* arr, const int N_arr, const Move &act)
         arr[i].y += act.dy;
         arr[i].z += act.dz;
     }
+}
+
+int Draw_line(My_Scene &scene, const Point &a, const Point &b) {
+
+    return Draw_2d_line(scene, a.x, a.y, b.x, b.y);
 }

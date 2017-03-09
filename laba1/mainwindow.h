@@ -19,9 +19,12 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void PaintAnswer(Model &mod);
+    void PaintScene(QGraphicsScene *scene);
 
 private slots:
     void answerChange(Model &mod);
+    void sceneChange(QGraphicsScene *scene);
+    void SendingScene(My_Scene *my_scene);
 private:
     Ui::MainWindow  *ui;
     MyGraphicView   *myPicture;     // Наш кастомный виджет

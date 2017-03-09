@@ -1,19 +1,23 @@
 #include "model_action.h"
 
 #include "point.h"
+#include "errors.h"
 #include <fstream>
 #include <stdlib.h>
 #include <iostream>
-void Rotate_model(Model &model, const Rotate &act) {
+int Rotate_model(Model &model, const Rotate &act) {
     Rotate_point_arr(model.vertex, model.N_v, act);
+    return 0;
 }
 
-void Scale_model(Model &model, const Scale &act) {
+int Scale_model(Model &model, const Scale &act) {
     Scale_point_arr(model.vertex, model.N_v, act);
+    return 0;
 }
 
-void Move_model(Model &model, const Move &act) {
+int  Move_model(Model &model, const Move &act) {
     Move_point_arr(model.vertex, model.N_v, act);
+    return 0;
 }
 int SaveModel(const Model &model, const Create &act) {
     std::ofstream out;
@@ -33,6 +37,8 @@ int SaveModel(const Model &model, const Create &act) {
     return 0;
 
 }
+//int Download_edge_arr(model, )
+
 
 int DownloadModel(Model &model, const Create &act) {
     Free_model(model);
@@ -49,12 +55,15 @@ int DownloadModel(Model &model, const Create &act) {
     inp >> N >> M;
     model.N_e = M;
     model.N_v = N;
-    Create_model(model, N, M);
+    int res = Create_model(model, N, M);
+    if(res == 1) {
+        return MEMORY_ERROR;
+    }
 
     flag = Download_point_arr(inp, model.vertex, N);
+
     if(flag == 1) {
         Free_model(model);
-        std::cout << "er" << std::endl;
         return FILE_ERROR;
     }
 
@@ -66,14 +75,11 @@ int DownloadModel(Model &model, const Create &act) {
             }
             else {
                 flag = 1;
-                std::cout << "er2" << std::endl;
 
             }
         }
         else {
             flag = 1;
-            std::cout << "er3" << std::endl;
-
         }
     }
     if(flag == 1) {
@@ -83,11 +89,14 @@ int DownloadModel(Model &model, const Create &act) {
     return 0;
 }
 
-void Free_model(Model &model) {
+int Free_model(Model &model) {
+    model.N_e = 0;
+    model.N_v = 0;
     if(model.edge)
         delete[] model.edge;
     if(model.vertex)
         delete[] model.vertex;
+    return 0;
 }
 
 int Create_model(Model &model, const int N_v, const int N_e) {
@@ -101,3 +110,17 @@ int Create_model(Model &model, const int N_v, const int N_e) {
     }
     return 0;
 }
+
+int Draw_model(My_Scene &scene, const Model &model) {
+    if(model.N_v == 0)
+        return MODEL_EMPTY;
+    int res;
+    for(int i = 0; i < model.N_e; i++) {
+        res = Draw_line(scene, model.vertex[model.edge[i][0]], model.vertex[model.edge[i][1]]);
+        if(res != 0) {
+            return res;
+        }
+    }
+    return 0;
+}
+

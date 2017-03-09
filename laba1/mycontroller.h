@@ -12,9 +12,10 @@
 #include <stdio.h>
 #include <vector>
 #include <QLineEdit>
+#include <QGraphicsScene>
 
 using namespace std;
-enum Text_Error { EMPTY, E_SYMBOL, E_PAIR_DATA, E_FEW_POINT, NO_ER };
+enum Text_Error { EMPTY, E_SYMBOL, NO_ER };
 
 
 namespace Ui {
@@ -28,8 +29,10 @@ class MyController : public QWidget
 public:
     explicit MyController(QWidget *parent = 0);
     ~MyController();
+    void GetScene(My_Scene *scene);
 signals:
     void AnswerChange(Model &mod);
+    void SceneChange(QGraphicsScene *scene);
 private slots:
     void on_rotateButton_clicked();
 
@@ -46,8 +49,7 @@ private slots:
 private:
 
     double *GetData(vector <QLineEdit*> &vec);
-
-
+    My_Scene scene;
     Ui::MyController *ui;
     Model model;
     QWidget *par;

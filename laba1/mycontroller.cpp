@@ -5,6 +5,8 @@
 #include <QFileDialog>
 #include <iostream>
 #include <string.h>
+
+
 #define MIN_PAR 10
 Text_Error LineEditError;
 
@@ -17,6 +19,9 @@ MyController::MyController(QWidget *parent) :
 
     par = parent;
     ui->setupUi(this);
+    //scene.scene = new QGraphicsScene();
+    //emit SceneChange(scene.scene);
+    //scene = new QGraphicsScene();
     //ui->aEdit->setValidator(new QIntValidator(11, 1000));
     //ui->bEdit->setValidator(new QIntValidator(11, 1000));
     ui->dxEdit->setValidator(new QRegExpValidator(QRegExp("^[+-]?[0-9]{0,5}(\\.|,|$)[0-9]{0,4}$")));
@@ -29,12 +34,18 @@ MyController::MyController(QWidget *parent) :
     ui->rot_yEdit->setValidator(new QRegExpValidator(QRegExp("^[+-]?[0-9]{0,5}(\\.|,|$)[0-9]{0,4}$")));
     ui->rot_zEdit->setValidator(new QRegExpValidator(QRegExp("^[+-]?[0-9]{0,5}(\\.|,|$)[0-9]{0,4}$")));
 }
+void MyController::GetScene(My_Scene *scene1) {
+    this->scene.x_center = scene1->x_center;
+    cout << scene.x_center << "sdf" << endl;
+    this->scene.y_center = scene1->y_center;
+    this->scene.scene = scene1->scene;
+}
 
 MyController::~MyController()
 {
     t_action act;
     act.free = true;
-    main_controller(model, act, FREE);
+   // main_controller(model, act, FREE);
     delete ui;
 }
 
@@ -45,7 +56,7 @@ double * MyController::GetData(vector <QLineEdit*> &vec)
     double *data = new double[vec.size()];
     double x;
     QString mess;
-    for(int i = 0; i < vec.size(); i++) {
+    for(unsigned int i = 0; i < vec.size(); i++) {
         str = vec[i]->text();
         x = Analiz_Text(str);
         switch(LineEditError)
@@ -101,6 +112,13 @@ double Analiz_Text(QString str)
 
 void MyController::on_rotateButton_clicked()
 {
+    //scene.addLine(100, 100, 200, 200);
+    //emit SceneChange(scene);
+
+
+    if(model.N_v == 0)
+        return;
+
     vector<QLineEdit*> edits;
     edits.push_back(ui->rot_xEdit);
     edits.push_back(ui->rot_yEdit);
@@ -111,8 +129,6 @@ void MyController::on_rotateButton_clicked()
     if(LineEditError != NO_ER)
         return;
 
-    if(model.N_v == 0)
-        return;
 
     t_action act;
 
@@ -120,13 +136,19 @@ void MyController::on_rotateButton_clicked()
     act.rotat.y_angle = data[1] * M_PI / 180;
     act.rotat.z_angle = data[2] * M_PI / 180;
 
-    main_controller(model, act, ROTATE);
+    main_controller(scene, act, ROTATE);
+    main_controller(scene, act, DRAW);
 
-    emit AnswerChange(model);
+    //emit AnswerChange(model);
 }
 
 void MyController::on_scaleButton_clicked()
 {
+    //scene.addLine(100, 0, 200, 200);
+
+    if(model.N_v == 0)
+        return;
+
     vector<QLineEdit*> edits;
     edits.push_back(ui->kxEdit);
     edits.push_back(ui->kyEdit);
@@ -137,8 +159,6 @@ void MyController::on_scaleButton_clicked()
     if(LineEditError != NO_ER)
         return;
 
-    if(model.N_v == 0)
-        return;
 
     t_action act;
 
@@ -146,14 +166,19 @@ void MyController::on_scaleButton_clicked()
     act.scal.ky = data[1];
     act.scal.kz = data[2];
 
-    main_controller(model, act, SCALE);
+//    main_controller(scene, act, SCALE);
+    main_controller(scene, act, SCALE);
+    main_controller(scene, act, DRAW);
 
-    emit AnswerChange(model);
+    //emit AnswerChange(model);
 
 }
 
 void MyController::on_moveButton_clicked()
 {
+    if(model.N_v == 0)
+        return;
+
     vector<QLineEdit*> edits;
     edits.push_back(ui->dxEdit);
     edits.push_back(ui->dyEdit);
@@ -164,8 +189,6 @@ void MyController::on_moveButton_clicked()
     if(LineEditError != NO_ER)
         return;
 
-    if(model.N_v == 0)
-        return;
 
     t_action act;
 
@@ -173,25 +196,31 @@ void MyController::on_moveButton_clicked()
     act.mov.dy = data[1];
     act.mov.dz = data[2];
 
-    main_controller(model, act, MOVE);
+    //main_controller(model, act, MOVE);
 
-    emit AnswerChange(model);
+    //emit AnswerChange(model);
 }
 
 
 void MyController::on_fileButton_clicked()
 {
+    //scene.x_center = scene.scene->sceneRect().width() / 2;
+    //scene.y_center = scene.scene->height() / 2;
+    cout << scene.x_center << " " << endl;
+
     QString str = QFileDialog::getOpenFileName(0, "Open Dialog", "", "*.txt");
     if(str == "")
         return;
     t_action act;
     strcpy(act.creat.fileName, str.toStdString().c_str());
-    int res = main_controller(model, act, CREATE);
+    int res = main_controller(scene, act, CREATE);
     QString mess = "";
     if(res == FILE_NOT_FIND) {
         mess = "Cannot open file";
     } else if(res == FILE_ERROR) {
         mess = "Error format of data";
+    } else if(res == MEMORY_ERROR) {
+        mess = "Mamory error";
     }
     if(mess != "") {
         QErrorMessage errorMessage;
@@ -199,18 +228,25 @@ void MyController::on_fileButton_clicked()
         errorMessage.exec();
         return;
     }
-    emit AnswerChange(model);
+    //scene.scene->addLine(100, 200, 0, 0);
+    //    emit SceneChange(scene.scene);
+    main_controller(scene, act, DRAW);
+        emit SceneChange(scene.scene);
+    //emit AnswerChange(model);
 }
 
 
 void MyController::on_saveButton_clicked()
 {
+    if(model.N_v == 0)
+        return;
+
     QString str = QFileDialog::getSaveFileName(0, "Save Dialog", "", "*.txt");
     if(str == "")
         return;
     t_action act;
     strcpy(act.creat.fileName, str.toStdString().c_str());
-    int res = main_controller(model, act, SAVE);
+    int res = main_controller(scene, act, SAVE);
     QString mess = "";
     if(res == FILE_NOT_FIND) {
         mess = "Cannot open file";
@@ -223,6 +259,7 @@ void MyController::on_saveButton_clicked()
         errorMessage.exec();
         return;
     }
+
     //emit AnswerChange(model);
 
 }

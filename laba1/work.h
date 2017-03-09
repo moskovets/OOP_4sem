@@ -2,9 +2,11 @@
 #define WORK_H
 
 #include "action.h"
+#include "my_scene.h"
+#include "errors.h"
 #include "model.h"
 
-enum type_action { ROTATE, CREATE, MOVE, SCALE, FREE, SAVE };
+enum type_action { ROTATE, CREATE, MOVE, SCALE, FREE, SAVE, DRAW };
 union t_action {
     Rotate rotat;
     Scale scal;
@@ -12,7 +14,8 @@ union t_action {
     Move mov;
     bool free;
 };
-
-int main_controller(Model &model, const t_action &act, type_action t);
+// принимает на вход модель, действие (одно из описанных)
+// и тип действия
+int main_controller(My_Scene &scene, const t_action &act, type_action t);
 
 #endif // WORK_H

@@ -1,30 +1,39 @@
 #include "work.h"
 
+#include "model.h"
 #include "model_action.h"
 //#include <iostream>
 
-int main_controller(Model &model, const t_action &act, type_action t)
+int main_controller(My_Scene &scene, const t_action &act, type_action t)
 {
+    static Model model; //INIT?
+
+    int result = OK;
     switch(t) {
     case CREATE:
-        return DownloadModel(model, act.creat);
+        result = DownloadModel(model, act.creat);
+        break;
     case ROTATE:
-        Rotate_model(model, act.rotat);
+        result = Rotate_model(model, act.rotat);
         break;
     case SCALE:
-        Scale_model(model, act.scal);
+        result = Scale_model(model, act.scal);
         break;
     case MOVE:
-        Move_model(model, act.mov);
+        result = Move_model(model, act.mov);
         break;
     case FREE:
-        Free_model(model);
+        result = Free_model(model);
         break;
     case SAVE:
-        return SaveModel(model, act.creat);
+        result = SaveModel(model, act.creat);
+        break;
+    case DRAW:
+        result = Draw_model(scene, model);
+        break;
     default:
-        return -1;
+        result = -1;
     }
-    return 0;
+    return result;
 }
 
