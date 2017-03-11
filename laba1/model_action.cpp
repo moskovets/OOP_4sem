@@ -8,20 +8,18 @@
 #include <stdlib.h>
 #include <iostream>
 #include "draw_on_scene.h"
-int Copy_model(Model &model, Model &copy);
+int Copy_model(Model &model, const Model &copy);
+
 int Rotate_model(Model &model, const Rotate &act) {
-    Rotate_point_arr(model.vertex, model.N_v, act);
-    return 0;
+    return Rotate_point_arr(model.vertex, model.N_v, act);
 }
 
 int Scale_model(Model &model, const Scale &act) {
-    Scale_point_arr(model.vertex, model.N_v, act);
-    return 0;
+    return Scale_point_arr(model.vertex, model.N_v, act);
 }
 
 int  Move_model(Model &model, const Move &act) {
-    Move_point_arr(model.vertex, model.N_v, act);
-    return 0;
+    return Move_point_arr(model.vertex, model.N_v, act);
 }
 int SaveModel(const Model &model, const Create &act) {
     std::ofstream out;
@@ -39,11 +37,9 @@ int SaveModel(const Model &model, const Create &act) {
     return ret;
 
 }
-//int Download_edge_arr(model, )
 
 
-int DownloadModel(Model &model, const Create &act) {
-//    Free_model(model);
+int LoadModel(Model &model, const Create &act) {
     std::ifstream inp;
     inp.open(act.fileName);
     if(!inp) {
@@ -57,16 +53,9 @@ int DownloadModel(Model &model, const Create &act) {
     if(!ret)
         ret = Free_model(model);
     if(!ret)
-        ret = Copy_model(model, buff);
+        model = buff;
     inp.close();
     return ret;
-}
-int Copy_model(Model &model, Model &copy) {
-    model.N_e = copy.N_e;
-    model.N_v = copy.N_v;
-    model.vertex = copy.vertex;
-    model.edge = copy.edge;
-    return 0;
 }
 
 int Free_model(Model &model) {
@@ -77,7 +66,7 @@ int Free_model(Model &model) {
     return 0;
 }
 
-int Create_model(Model &model, const int N_v, const int N_e) {
+/*int Create_model(Model &model, const int N_v, const int N_e) {
     model.vertex = new Point[N_v];
     if(!model.vertex)
         return 1;
@@ -87,7 +76,7 @@ int Create_model(Model &model, const int N_v, const int N_e) {
         return 1;
     }
     return 0;
-}
+}*/
 
 int Draw_model(My_Scene &scene, const Model &model) {
     if(model.N_v == 0)

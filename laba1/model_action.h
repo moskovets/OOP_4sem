@@ -11,7 +11,7 @@ int Scale_model(Model &model, const Scale &act);
 int Move_model(Model &model, const Move &act);
 
 //загрузка модели из файла
-int DownloadModel(Model &model, const Create &act);
+int LoadModel(Model &model, const Create &act);
 
 //сохранение модели в файл
 int SaveModel(const Model &model, const Create &act);
@@ -20,7 +20,7 @@ int SaveModel(const Model &model, const Create &act);
 int Free_model(Model &model);
 
 //выделения памяти под заданной количество вершин и ребер
-int Create_model(Model &model, const int N_v, const int N_e);
+//int Create_model(Model &model, const int N_v, const int N_e);
 
 int Draw_model(My_Scene &scene, const Model &model);
 #endif // MODEL_ACTION_H

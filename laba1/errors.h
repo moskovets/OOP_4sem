@@ -2,7 +2,7 @@
 #define ERRORS_H
 
 //возможные ошибки работы функций
-enum ERRORS { OK,
+enum ERRORS { OK = 0,
               FILE_NOT_FIND,
               FILE_ERROR,
               MEMORY_ERROR,

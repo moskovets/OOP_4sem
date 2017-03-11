@@ -23,10 +23,21 @@ typedef double t_vect[N_DIMEN];
 //получние результирующей матрицы поворота по 3-м углам
 void GetResultMatrix(t_matrix a, const Rotate &act);
 
+//конвертация точки в вектор
+int From_vec_to_Point(Point &p, const t_vect &vec);
+int From_Point_to_vec(t_vect &vec, const Point &p);
+
+
 //преобразование массива точек
-void Rotate_point_arr(Point* arr, const int N_arr, const Rotate &act);
-void Scale_point_arr(Point* arr, const int N_arr, const Scale &act);
-void Move_point_arr(Point* arr, const int N_arr, const Move &act);
+int Rotate_point_arr(Point* arr, const int N_arr, const Rotate &act);
+int Scale_point_arr(Point* arr, const int N_arr, const Scale &act);
+int Move_point_arr(Point* arr, const int N_arr, const Move &act);
+
+//перенос одной точки
+int Move_point(Point &p, const Move &act);
+
+//Применение матрицы преобразований к одной точке
+int Change_Point_with_matrix(Point &p, const t_matrix &m_rotate);
 
 //загрузка массива точек опр. длины из файла
 int Load_point_arr(std::ifstream &inp, Point **arr, int &N);

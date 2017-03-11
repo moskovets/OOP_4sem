@@ -6,12 +6,12 @@
 
 int main_controller(My_Scene &scene, const t_action &act, type_action t)
 {
-    static Model model; //INIT?
+    static Model model;
 
     int result = OK;
     switch(t) {
     case CREATE:
-        result = DownloadModel(model, act.creat);
+        result = LoadModel(model, act.creat);
         break;
     case ROTATE:
         result = Rotate_model(model, act.rotat);

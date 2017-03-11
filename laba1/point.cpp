@@ -12,9 +12,9 @@ int Load_point_arr(std::ifstream &inp, Point** arr, int &N)
 
     for(int i = 0; i < N && !ret; i++) {
         ret = Load_point(inp, (*arr)[i]);
-        if(ret) {
-            Free_Point_arr(arr);
-        }
+    }
+    if(ret) {
+        Free_Point_arr(arr);
     }
     return ret;
 }
@@ -63,7 +63,7 @@ int Save_point(std::ofstream &out, const Point& p)
     return 0;
 }
 
-void Mult(t_vect vec, const t_matrix a)
+int Mult(t_vect vec, const t_matrix a)
 {
     t_vect res = {0};
     for(int i = 0; i < N_DIMEN; i++) {
@@ -74,6 +74,7 @@ void Mult(t_vect vec, const t_matrix a)
     for(int i = 0; i < N_DIMEN; i++) {
         vec[i] = res[i];
     }
+    return 0;
 }
 
 void Mult_matrix(t_matrix res, const t_matrix a, const t_matrix b)
@@ -106,47 +107,75 @@ void GetResultMatrix(t_matrix a, const Rotate &act)
 }
 
 
-void Rotate_point_arr(Point* arr, const int N_arr, const Rotate &act)
+int Rotate_point_arr(Point* arr, const int N_arr, const Rotate &act)
 {
+    if(!arr)
+        return MODEL_EMPTY;
     t_matrix m;
+    int ret = 0;
     GetResultMatrix(m, act);
-
-    t_vect vec;
-    for(int i = 0; i < N_arr; ++i) {
-        vec[0] = arr[i].x;
-        vec[1] = arr[i].y;
-        vec[2] = arr[i].z;
-        Mult(vec, m);
-        arr[i].x = vec[0];
-        arr[i].y = vec[1];
-        arr[i].z = vec[2];
+    for(int i = 0; i < N_arr && !ret; ++i) {
+        ret = Change_Point_with_matrix(arr[i], m);
     }
+   return ret;
+}
+int From_vec_to_Point(Point &p, const t_vect &vec) {
+    p.x = vec[0];
+    p.y = vec[1];
+    p.z = vec[2];
+    return 0;
+}
+int From_Point_to_vec(t_vect &vec, const Point &p) {
+    vec[0] = p.x;
+    vec[1] = p.y;
+    vec[2] = p.z;
+    return 0;
 }
 
-void Scale_point_arr(Point* arr, const int N_arr, const Scale &act)
+int Change_Point_with_matrix(Point &p, const t_matrix &m_rotate) {
+    t_vect vec;
+    int ret = 0;
+    ret = From_Point_to_vec(vec, p);
+    if(!ret)
+        ret = Mult(vec, m_rotate);
+
+    if(!ret)
+        ret = From_vec_to_Point(p, vec);
+    return ret;
+}
+
+int Scale_point_arr(Point* arr, const int N_arr, const Scale &act)
 {
+    if(!arr)
+        return MODEL_EMPTY;
+
     t_matrix m = { { act.kx, 0, 0 },
                    { 0, act.ky, 0 },
                    { 0, 0, act.kz } };
-    t_vect vec;
-    for(int i = 0; i < N_arr; ++i) {
-        vec[0] = arr[i].x;
-        vec[1] = arr[i].y;
-        vec[2] = arr[i].z;
-        Mult(vec, m);
-        arr[i].x = vec[0];
-        arr[i].y = vec[1];
-        arr[i].z = vec[2];
+    int ret = 0;
+    for(int i = 0; i < N_arr && !ret; ++i) {
+        ret = Change_Point_with_matrix(arr[i], m);
     }
+    return ret;
 }
 
-void Move_point_arr(Point* arr, const int N_arr, const Move &act)
+int Move_point(Point &p, const Move &act)
 {
-    for(int i = 0; i < N_arr; ++i) {
-        arr[i].x += act.dx;
-        arr[i].y += act.dy;
-        arr[i].z += act.dz;
+    p.x += act.dx;
+    p.y += act.dy;
+    p.z += act.dz;
+    return 0;
+}
+
+int Move_point_arr(Point* arr, const int N_arr, const Move &act)
+{
+    if(!arr)
+        return MODEL_EMPTY;
+    int ret = 0;
+    for(int i = 0; i < N_arr && !ret; ++i) {
+        ret = Move_point(arr[i], act);
     }
+    return ret;
 }
 
 int Draw_line(My_Scene &scene, const Point &a, const Point &b) {
