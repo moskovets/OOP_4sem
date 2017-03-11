@@ -1,6 +1,6 @@
 #include "model_action.h"
 
-#include "point.h"
+#include "point_arr.h"
 #include "edges.h"
 
 #include "errors.h"

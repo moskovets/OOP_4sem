@@ -27,26 +27,16 @@ void GetResultMatrix(t_matrix a, const Rotate &act);
 int From_vec_to_Point(Point &p, const t_vect &vec);
 int From_Point_to_vec(t_vect &vec, const Point &p);
 
-
-//преобразование массива точек
-int Rotate_point_arr(Point* arr, const int N_arr, const Rotate &act);
-int Scale_point_arr(Point* arr, const int N_arr, const Scale &act);
-int Move_point_arr(Point* arr, const int N_arr, const Move &act);
-
 //перенос одной точки
 int Move_point(Point &p, const Move &act);
 
 //Применение матрицы преобразований к одной точке
 int Change_Point_with_matrix(Point &p, const t_matrix &m_rotate);
 
-//загрузка массива точек опр. длины из файла
-int Load_point_arr(std::ifstream &inp, Point **arr, int &N);
+//загрузка точки опр. длины из файла
 int Load_point(std::ifstream &inp, Point& p);
-int Allocate_Point_arr(Point **arr, const int N);
-int Free_Point_arr(Point** arr);
 
-//запись массива точек в файл
-int Save_point_arr(std::ofstream &out, const Point* arr, const int N);
+//запись точки в файл
 int Save_point(std::ofstream &out, const Point& p);
 
 int Draw_line(My_Scene &scene, const Point &a, const Point &b);
