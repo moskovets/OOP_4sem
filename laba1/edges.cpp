@@ -77,3 +77,15 @@ int Save_edge(const t_edge& p, OUT_Stream &stream) {
     snprintf(buff, BUFF_SIZE, "%d %d\n", p[0]+1, p[1]+1);
     return Print_Stream(stream, buff);
 }
+
+int Get_N_edges(const edges_arr & edges) {
+    return edges.N_e;
+}
+
+int Get_edge_start(const edges_arr &edges, int i) {
+    return edges.arr[i][0];
+}
+
+int Get_edge_end(const edges_arr &edges, int i) {
+    return edges.arr[i][1];
+}

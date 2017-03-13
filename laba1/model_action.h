@@ -22,4 +22,10 @@ int SaveModel(const Model &model, const Create &act);
 int Free_model(Model &model);
 
 int Draw_model(My_Scene &scene, const Model &model);
+
+int Get_N_vertex(const Model &model);
+
+int Get_N_edges(const Model &model);
+
+
 #endif // MODEL_ACTION_H

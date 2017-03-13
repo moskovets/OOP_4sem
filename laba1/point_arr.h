@@ -20,4 +20,8 @@ int Free_Point_arr(vertex_arr &vertex);
 //запись массива точек в файл
 int Save_point_arr(const vertex_arr &vertex, OUT_Stream &stream);
 
+int Get_N_vertex(const vertex_arr &vertex);
+
+Point Get_Point(const vertex_arr &vertex, int i);
+
 #endif // POINT_ARR_H

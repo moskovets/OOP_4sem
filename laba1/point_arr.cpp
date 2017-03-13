@@ -90,3 +90,11 @@ int Move_point_arr(vertex_arr &vertex, const Move &act)
     }
     return ret;
 }
+
+int Get_N_vertex(const vertex_arr &vertex) {
+    return vertex.N_v;
+}
+
+Point Get_Point(const vertex_arr &vertex, int i) {
+    return vertex.arr[i];
+}

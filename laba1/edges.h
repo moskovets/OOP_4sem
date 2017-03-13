@@ -19,4 +19,9 @@ int Free_Edge_arr(edges_arr &edges);
 int Save_edge_arr(const edges_arr &edges, OUT_Stream &stream);
 int Save_edge(const t_edge& p, OUT_Stream &stream);
 
+int Get_N_edges(const edges_arr & edges);
+
+int Get_edge_start(const edges_arr &edges, int i);
+int Get_edge_end(const edges_arr &edges, int i);
+
 #endif // EDGES_H

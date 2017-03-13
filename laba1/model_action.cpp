@@ -65,17 +65,27 @@ int Free_model(Model &model) {
 
 
 int Draw_model(My_Scene &scene, const Model &model) {
-    if(model.vertex.N_v == 0)
+    int N_v = Get_N_vertex(model.vertex);
+    int N_e = Get_N_edges(model.edges);
+    if(N_v == 0)
         return MODEL_EMPTY;
     Clean_Scene(scene);
-    int res;
-    for(int i = 0; i < model.edges.N_e; i++) {
-        //Get_vertex_number(j, k, model.edges, i);
-        res = Draw_line(scene, model.vertex.arr[model.edges.arr[i][0]], model.vertex.arr[model.edges.arr[i][1]]);
-        if(res != 0) {
-            return res;
-        }
+
+    int ret = 0;
+    for(int i = 0; i < N_e && !ret; i++) {
+        int start = Get_edge_start(model.edges, i);
+        int end = Get_edge_end(model.edges, i);
+        Point p1 = Get_Point(model.vertex, start);
+        Point p2 = Get_Point(model.vertex, end);
+        ret = Draw_line(scene, p1, p2);
     }
-    return 0;
+    return ret;
 }
 
+int Get_N_vertex(const Model &model) {
+    return Get_N_vertex(model.vertex);
+}
+
+int Get_N_edges(const Model &model) {
+    return Get_N_edges(model.edges);
+}
