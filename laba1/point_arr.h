@@ -1,18 +1,23 @@
 #ifndef POINT_ARR_H
 #define POINT_ARR_H
 #include "point.h"
+struct vertex_arr {
+    Point *arr = NULL;
+    int N_v = 0;
+};
+
 //преобразование массива точек
-int Rotate_point_arr(Point* arr, const int N_arr, const Rotate &act);
-int Scale_point_arr(Point* arr, const int N_arr, const Scale &act);
-int Move_point_arr(Point* arr, const int N_arr, const Move &act);
+int Rotate_point_arr(vertex_arr &vert, const Rotate &act);
+int Scale_point_arr(vertex_arr &vertex, const Scale &act);
+int Move_point_arr(vertex_arr &vertex, const Move &act);
 
 //загрузка массива точек опр. длины из файла
-int Load_point_arr(std::ifstream &inp, Point **arr, int &N);
+int Load_point_arr(vertex_arr &vertex, std::ifstream &inp);
 
-int Allocate_Point_arr(Point **arr, const int N);
-int Free_Point_arr(Point** arr);
+int Allocate_Point_arr(vertex_arr &vertex);
+int Free_Point_arr(vertex_arr &vertex);
 
 //запись массива точек в файл
-int Save_point_arr(std::ofstream &out, const Point* arr, const int N);
+int Save_point_arr(const vertex_arr &vertex, std::ofstream &out);
 
 #endif // POINT_ARR_H

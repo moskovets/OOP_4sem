@@ -5,9 +5,7 @@
 #include <stdlib.h>
 
 struct Model {
-    //vertex_arr vertexes;
-    Point *vertex = NULL;
-    int N_v = 0;
+    vertex_arr vertex;
     edges_arr edges;
 };
 
