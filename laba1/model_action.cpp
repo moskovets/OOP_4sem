@@ -31,7 +31,7 @@ int SaveModel(const Model &model, const Create &act) {
 
     ret = Save_point_arr(out, model.vertex, model.N_v);
     if(!ret)
-        ret = Save_edge_arr(out, model.edge, model.N_e);
+        ret = Save_edge_arr(model.edges, out);
 
     out.close();
     return ret;
@@ -49,7 +49,7 @@ int LoadModel(Model &model, const Create &act) {
     int ret = 0;
     ret = Load_point_arr(inp, &buff.vertex, buff.N_v);
     if(!ret)
-        ret = Load_edge_arr(inp, &buff.edge, buff.N_e);
+        ret = Load_edge_arr(buff.edges, inp);
     if(!ret)
         ret = Free_model(model);
     if(!ret)
@@ -59,9 +59,9 @@ int LoadModel(Model &model, const Create &act) {
 }
 
 int Free_model(Model &model) {
-    model.N_e = 0;
+    //model.N_e = 0;
     model.N_v = 0;
-    Free_Edge_arr(&model.edge);
+    Free_Edge_arr(model.edges);
     Free_Point_arr(&model.vertex);
     return 0;
 }
@@ -83,8 +83,8 @@ int Draw_model(My_Scene &scene, const Model &model) {
         return MODEL_EMPTY;
     Clean_Scene(scene);
     int res;
-    for(int i = 0; i < model.N_e; i++) {
-        res = Draw_line(scene, model.vertex[model.edge[i][0]], model.vertex[model.edge[i][1]]);
+    for(int i = 0; i < model.edges.N_e; i++) {
+        res = Draw_line(scene, model.vertex[model.edges.arr[i][0]], model.vertex[model.edges.arr[i][1]]);
         if(res != 0) {
             return res;
         }

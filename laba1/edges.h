@@ -4,12 +4,17 @@
 
 typedef int t_edge[2];
 
-int Load_edge_arr(std::ifstream &inp, t_edge** arr, int &N);
-int Load_edge(std::ifstream &inp, t_edge& p);
-int Allocate_Edge_arr(t_edge **arr, const int N);
-int Free_Edge_arr(t_edge** arr);
+struct edges_arr {
+    t_edge *arr = NULL;
+    int N_e = 0;
+};
 
-int Save_edge_arr(std::ofstream &out, const t_edge* arr, const int N);
-int Save_edge(std::ofstream &out, const t_edge& p);
+int Load_edge_arr(edges_arr &edges, std::ifstream &inp);
+int Load_edge(t_edge& p, std::ifstream &inp);
+int Allocate_Edge_arr(edges_arr &edges);
+int Free_Edge_arr(edges_arr &edges);
+
+int Save_edge_arr(const edges_arr &edges, std::ofstream &out);
+int Save_edge(const t_edge& p, std::ofstream &out);
 
 #endif // EDGES_H
