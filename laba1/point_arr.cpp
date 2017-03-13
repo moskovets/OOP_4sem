@@ -1,6 +1,13 @@
 #include "point_arr.h"
 #include "errors.h"
 
+vertex_arr Init_vertex() {
+    vertex_arr vertex;
+    vertex.arr = NULL;
+    vertex.N_v = 0;
+    return vertex;
+}
+
 int Load_point_arr(vertex_arr &vertex, std::ifstream &inp)
 {
     int N;

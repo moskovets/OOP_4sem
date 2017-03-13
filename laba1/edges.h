@@ -9,6 +9,8 @@ struct edges_arr {
     int N_e = 0;
 };
 
+edges_arr Init_edges();
+
 int Load_edge_arr(edges_arr &edges, std::ifstream &inp);
 int Load_edge(t_edge& p, std::ifstream &inp);
 int Allocate_Edge_arr(edges_arr &edges);

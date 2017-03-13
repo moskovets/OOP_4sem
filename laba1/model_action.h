@@ -5,6 +5,8 @@
 #include "model.h"
 #include "my_scene.h"
 
+Model Init_model();
+
 //преобразование модели
 int Rotate_model(Model &model, const Rotate &act);
 int Scale_model(Model &model, const Scale &act);
@@ -18,9 +20,6 @@ int SaveModel(const Model &model, const Create &act);
 
 //освобождения массивов вершин и ребер
 int Free_model(Model &model);
-
-//выделения памяти под заданной количество вершин и ребер
-//int Create_model(Model &model, const int N_v, const int N_e);
 
 int Draw_model(My_Scene &scene, const Model &model);
 #endif // MODEL_ACTION_H

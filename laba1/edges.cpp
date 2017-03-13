@@ -1,6 +1,13 @@
 #include "edges.h"
 #include "errors.h"
 
+edges_arr Init_edges()
+{
+    edges_arr edges;
+    edges.arr = NULL;
+    edges.N_e = 0;
+    return edges;
+}
 
 int Load_edge_arr(edges_arr &edges, std::ifstream &inp)
 {

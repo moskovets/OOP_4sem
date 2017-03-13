@@ -8,7 +8,12 @@
 #include <stdlib.h>
 #include <iostream>
 #include "draw_on_scene.h"
-int Copy_model(Model &model, const Model &copy);
+Model Init_model() {
+    Model model;
+    model.vertex = Init_vertex();
+    model.edges = Init_edges();
+    return model;
+}
 
 int Rotate_model(Model &model, const Rotate &act) {
     return Rotate_point_arr(model.vertex, act);
@@ -64,17 +69,6 @@ int Free_model(Model &model) {
     return 0;
 }
 
-/*int Create_model(Model &model, const int N_v, const int N_e) {
-    model.vertex = new Point[N_v];
-    if(!model.vertex)
-        return 1;
-    model.edge = new int[N_e][2];
-    if(!model.edge) {
-        delete[] model.vertex;
-        return 1;
-    }
-    return 0;
-}*/
 
 int Draw_model(My_Scene &scene, const Model &model) {
     if(model.vertex.N_v == 0)
@@ -82,6 +76,7 @@ int Draw_model(My_Scene &scene, const Model &model) {
     Clean_Scene(scene);
     int res;
     for(int i = 0; i < model.edges.N_e; i++) {
+        //Get_vertex_number(j, k, model.edges, i);
         res = Draw_line(scene, model.vertex.arr[model.edges.arr[i][0]], model.vertex.arr[model.edges.arr[i][1]]);
         if(res != 0) {
             return res;

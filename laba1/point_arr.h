@@ -5,7 +5,7 @@ struct vertex_arr {
     Point *arr = NULL;
     int N_v = 0;
 };
-
+vertex_arr Init_vertex();
 //преобразование массива точек
 int Rotate_point_arr(vertex_arr &vert, const Rotate &act);
 int Scale_point_arr(vertex_arr &vertex, const Scale &act);

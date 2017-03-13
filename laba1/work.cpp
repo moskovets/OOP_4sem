@@ -6,7 +6,7 @@
 
 int main_controller(My_Scene &scene, const t_action &act, type_action t)
 {
-    static Model model;
+    static Model model = Init_model();
 
     int result = OK;
     switch(t) {
