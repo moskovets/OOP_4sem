@@ -51,6 +51,7 @@ private:
     Ui::MyController *ui;
     Model model;
     QWidget *par;
+    QRegExpValidator *Validator;
 
 };
 

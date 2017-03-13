@@ -28,5 +28,6 @@ void MyGraphicView::Connect()
 
 MyGraphicView::~MyGraphicView()
 {
+    delete my_scene.scene;
     delete ui;
 }

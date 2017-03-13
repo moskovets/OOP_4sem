@@ -19,15 +19,16 @@ MyController::MyController(QWidget *parent) :
 
     par = parent;
     ui->setupUi(this);
-    ui->dxEdit->setValidator(new QRegExpValidator(QRegExp("^[+-]?[0-9]{0,5}(\\.|,|$)[0-9]{0,4}$")));
-    ui->dyEdit->setValidator(new QRegExpValidator(QRegExp("^[+-]?[0-9]{0,5}(\\.|,|$)[0-9]{0,4}$")));
-    ui->dzEdit->setValidator(new QRegExpValidator(QRegExp("^[+-]?[0-9]{0,5}(\\.|,|$)[0-9]{0,4}$")));
-    ui->kxEdit->setValidator(new QRegExpValidator(QRegExp("^[+-]?[0-9]{0,5}(\\.|,|$)[0-9]{0,4}$")));
-    ui->kyEdit->setValidator(new QRegExpValidator(QRegExp("^[+-]?[0-9]{0,5}(\\.|,|$)[0-9]{0,4}$")));
-    ui->kzEdit->setValidator(new QRegExpValidator(QRegExp("^[+-]?[0-9]{0,5}(\\.|,|$)[0-9]{0,4}$")));
-    ui->rot_xEdit->setValidator(new QRegExpValidator(QRegExp("^[+-]?[0-9]{0,5}(\\.|,|$)[0-9]{0,4}$")));
-    ui->rot_yEdit->setValidator(new QRegExpValidator(QRegExp("^[+-]?[0-9]{0,5}(\\.|,|$)[0-9]{0,4}$")));
-    ui->rot_zEdit->setValidator(new QRegExpValidator(QRegExp("^[+-]?[0-9]{0,5}(\\.|,|$)[0-9]{0,4}$")));
+    Validator = new QRegExpValidator(QRegExp("^[+-]?[0-9]{0,5}(\\.|,|$)[0-9]{0,4}$"));
+    ui->dxEdit->setValidator(Validator);
+    ui->dyEdit->setValidator(Validator);
+    ui->dzEdit->setValidator(Validator);
+    ui->kxEdit->setValidator(Validator);
+    ui->kyEdit->setValidator(Validator);
+    ui->kzEdit->setValidator(Validator);
+    ui->rot_xEdit->setValidator(Validator);
+    ui->rot_yEdit->setValidator(Validator);
+    ui->rot_zEdit->setValidator(Validator);
 }
 void MyController::GetScene(My_Scene *scene1) {
     this->scene.x_center = scene1->x_center;
@@ -39,6 +40,7 @@ MyController::~MyController()
 {
     t_action act;
     act.free = true;
+    delete Validator;
     main_controller(scene, act, FREE);
     delete ui;
 }
@@ -126,6 +128,7 @@ void MyController::on_rotateButton_clicked()
 
     main_controller(scene, act, ROTATE);
     main_controller(scene, act, DRAW);
+    delete[] data;
 }
 
 void MyController::on_scaleButton_clicked()
@@ -149,6 +152,7 @@ void MyController::on_scaleButton_clicked()
 
     main_controller(scene, act, SCALE);
     main_controller(scene, act, DRAW);
+    delete[] data;
 
 }
 
@@ -174,6 +178,7 @@ void MyController::on_moveButton_clicked()
 
     main_controller(scene, act, MOVE);
     main_controller(scene, act, DRAW);
+    delete[] data;
 }
 
 
