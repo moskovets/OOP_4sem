@@ -27,5 +27,9 @@ int Get_N_vertex(const Model &model);
 
 int Get_N_edges(const Model &model);
 
+vertex_arr Get_vertex_arr(const Model &model);
+//Point* Get_vertex_arr(const Model &model);
+edges_arr Get_edges_arr(const Model &model);
+//t_edge* Get_edges_arr(const Model &model);
 
 #endif // MODEL_ACTION_H

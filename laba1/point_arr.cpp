@@ -98,3 +98,7 @@ int Get_N_vertex(const vertex_arr &vertex) {
 Point Get_Point(const vertex_arr &vertex, int i) {
     return vertex.arr[i];
 }
+Point* Get_vertex_arr(const vertex_arr &vertex) {
+    return vertex.arr;
+}
+

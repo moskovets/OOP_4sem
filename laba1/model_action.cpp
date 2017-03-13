@@ -65,8 +65,8 @@ int Free_model(Model &model) {
 
 
 int Draw_model(My_Scene &scene, const Model &model) {
-    int N_v = Get_N_vertex(model.vertex);
-    int N_e = Get_N_edges(model.edges);
+    int N_v = Get_N_vertex(model);
+    int N_e = Get_N_edges(model);
     if(N_v == 0)
         return MODEL_EMPTY;
     Clean_Scene(scene);
@@ -89,3 +89,16 @@ int Get_N_vertex(const Model &model) {
 int Get_N_edges(const Model &model) {
     return Get_N_edges(model.edges);
 }
+
+vertex_arr Get_vertex_arr(const Model &model) {
+    return model.vertex;
+}
+/*Point* Get_vertex_arr(const Model &model) {
+    return Get_vertex_arr(model.vertex);
+}*/
+edges_arr Get_edges_arr(const Model &model) {
+    return model.edges;
+}
+/*t_edge* Get_edges_arr(const Model &model) {
+    return Get_edges_arr(model.edges);
+}*/

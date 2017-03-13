@@ -24,4 +24,6 @@ int Get_N_edges(const edges_arr & edges);
 int Get_edge_start(const edges_arr &edges, int i);
 int Get_edge_end(const edges_arr &edges, int i);
 
+t_edge* Get_edges_arr(const edges_arr &edges);
+
 #endif // EDGES_H

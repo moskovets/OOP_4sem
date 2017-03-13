@@ -24,4 +24,6 @@ int Get_N_vertex(const vertex_arr &vertex);
 
 Point Get_Point(const vertex_arr &vertex, int i);
 
+Point* Get_vertex_arr(const vertex_arr &vertex);
+
 #endif // POINT_ARR_H
