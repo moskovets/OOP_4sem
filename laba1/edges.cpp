@@ -1,6 +1,8 @@
 #include "edges.h"
 #include "errors.h"
+#include "stdio.h"
 
+#define BUFF_SIZE 100
 edges_arr Init_edges()
 {
     edges_arr edges;
@@ -9,35 +11,37 @@ edges_arr Init_edges()
     return edges;
 }
 
-int Load_edge_arr(edges_arr &edges, std::ifstream &inp)
+int Load_edge_arr(edges_arr &edges, IN_Stream &stream)
 {
     int N;
-    if(!(inp >> N)) {
-        return FILE_ERROR;
+    int ret = 0;
+    ret = Read_Stream(N, stream);
+    if(ret) {
+        return ret;
     }
     edges.N_e = N;
-    int ret = 0;
     ret = Allocate_Edge_arr(edges);
 
     for(int i = 0; i < N && !ret; i++) {
-        ret = Load_edge(edges.arr[i], inp);
+        ret = Load_edge(edges.arr[i], stream);
     }
     if(ret) {
         Free_Edge_arr(edges);
     }
     return ret;
 }
-int Load_edge(t_edge& p, std::ifstream &inp)
+int Load_edge(t_edge& p, IN_Stream &stream)
 {
     int x, y;
-    if(inp >> x && inp >> y) {
+    int ret = Read_Stream(x, stream);
+    if(!ret)
+        ret = Read_Stream(y, stream);
+
+    if(!ret) {
         p[0] = x - 1;
         p[1] = y - 1;
     }
-    else {
-        return FILE_ERROR;
-    }
-    return 0;
+    return ret;
 }
 
 int Allocate_Edge_arr(edges_arr &edges)
@@ -57,19 +61,19 @@ int Free_Edge_arr(edges_arr &edges)
     return 0;
 }
 
-int Save_edge_arr(const edges_arr &edges, std::ofstream &out) {
-    if(!out)
-        return FILE_NOT_FIND;
-    out << edges.N_e << std::endl;
-    for(int i = 0; i < edges.N_e; i++) {
-        Save_edge(edges.arr[i], out);
+int Save_edge_arr(const edges_arr &edges, OUT_Stream &stream) {
+    char buff[BUFF_SIZE];
+    snprintf(buff, BUFF_SIZE, "%d\n", edges.N_e);
+    int ret = Print_Stream(stream, buff);
+
+    for(int i = 0; i < edges.N_e && !ret; i++) {
+        ret = Save_edge(edges.arr[i], stream);
     }
-    return 0;
+    return ret;
 }
 
-int Save_edge(const t_edge& p, std::ofstream &out) {
-    if(!out)
-        return FILE_NOT_FIND;
-    out << p[0] + 1 << " " << p[1] + 1 << std::endl;
-    return 0;
+int Save_edge(const t_edge& p, OUT_Stream &stream) {
+    char buff[BUFF_SIZE];
+    snprintf(buff, BUFF_SIZE, "%d %d\n", p[0]+1, p[1]+1);
+    return Print_Stream(stream, buff);
 }

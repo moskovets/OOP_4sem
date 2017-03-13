@@ -27,39 +27,33 @@ int  Move_model(Model &model, const Move &act) {
     return Move_point_arr(model.vertex, act);
 }
 int SaveModel(const Model &model, const Create &act) {
-    std::ofstream out;
-    out.open(act.fileName);
-    if(!out) {
-        return FILE_NOT_FIND;
-    }
-    int ret = 0;
-
-    ret = Save_point_arr(model.vertex, out);
+    OUT_Stream stream;
+    int ret = Open_Stream(stream, act.fileName);
+    if(ret)
+        return ret;
+    ret = Save_point_arr(model.vertex, stream);
     if(!ret)
-        ret = Save_edge_arr(model.edges, out);
-
-    out.close();
+        ret = Save_edge_arr(model.edges, stream);
+    Close_Stream(stream);
     return ret;
 
 }
 
 
 int LoadModel(Model &model, const Create &act) {
-    std::ifstream inp;
-    inp.open(act.fileName);
-    if(!inp) {
-        return FILE_NOT_FIND;
-    }
+    IN_Stream stream;
+    int ret = Open_Stream(stream, act.fileName);
+    if(ret)
+        return ret;
     Model buff;
-    int ret = 0;
-    ret = Load_point_arr(buff.vertex, inp);
+    ret = Load_point_arr(buff.vertex, stream);
     if(!ret)
-        ret = Load_edge_arr(buff.edges, inp);
+        ret = Load_edge_arr(buff.edges, stream);
     if(!ret)
         ret = Free_model(model);
     if(!ret)
         model = buff;
-    inp.close();
+    Close_Stream(stream);
     return ret;
 }
 

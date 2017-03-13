@@ -12,12 +12,12 @@ int Scale_point_arr(vertex_arr &vertex, const Scale &act);
 int Move_point_arr(vertex_arr &vertex, const Move &act);
 
 //загрузка массива точек опр. длины из файла
-int Load_point_arr(vertex_arr &vertex, std::ifstream &inp);
+int Load_point_arr(vertex_arr &vertex, IN_Stream &stream);
 
 int Allocate_Point_arr(vertex_arr &vertex);
 int Free_Point_arr(vertex_arr &vertex);
 
 //запись массива точек в файл
-int Save_point_arr(const vertex_arr &vertex, std::ofstream &out);
+int Save_point_arr(const vertex_arr &vertex, OUT_Stream &stream);
 
 #endif // POINT_ARR_H

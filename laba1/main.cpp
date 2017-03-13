@@ -5,8 +5,7 @@
 int main(int argc, char *argv[])
 {
     //подключаем русский язык
-    QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8")); //изменения
-
+    //QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8")); //изменения
     QApplication a(argc, argv);
     MainWindow w;
     w.show();

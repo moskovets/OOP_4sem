@@ -206,7 +206,7 @@ void MyController::on_fileButton_clicked()
 
 void MyController::on_saveButton_clicked()
 {
-
+setlocale (LC_ALL, "C");
     QString str = QFileDialog::getSaveFileName(0, "Save Dialog", "", "*.txt");
     if(str == "")
         return;

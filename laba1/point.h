@@ -3,6 +3,8 @@
 
 #include "action.h"
 #include "my_scene.h"
+#include "my_stream.h"
+#define BUFF_SIZE 100
 
 #include <math.h>
 #include <fstream>
@@ -34,10 +36,10 @@ int Move_point(Point &p, const Move &act);
 int Change_Point_with_matrix(Point &p, const t_matrix &m_rotate);
 
 //загрузка точки опр. длины из файла
-int Load_point(std::ifstream &inp, Point& p);
+int Load_point(Point& p, IN_Stream &stream);
 
 //запись точки в файл
-int Save_point(std::ofstream &out, const Point& p);
+int Save_point(const Point& p, OUT_Stream &stream);
 
 int Draw_line(My_Scene &scene, const Point &a, const Point &b);
 #endif // POINT_H

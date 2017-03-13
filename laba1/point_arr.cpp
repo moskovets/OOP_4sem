@@ -8,18 +8,19 @@ vertex_arr Init_vertex() {
     return vertex;
 }
 
-int Load_point_arr(vertex_arr &vertex, std::ifstream &inp)
+int Load_point_arr(vertex_arr &vertex, IN_Stream &stream)
 {
     int N;
-    if(!(inp >> N)) {
-        return FILE_ERROR;
+    int ret = 0;
+    ret = Read_Stream(N, stream);
+    if(ret) {
+        return ret;
     }
     vertex.N_v = N;
-    int ret = 0;
     ret = Allocate_Point_arr(vertex);
 
     for(int i = 0; i < N && !ret; i++) {
-        ret = Load_point(inp, vertex.arr[i]);
+        ret = Load_point(vertex.arr[i], stream);
     }
     if(ret) {
         Free_Point_arr(vertex);
@@ -40,15 +41,16 @@ int Free_Point_arr(vertex_arr &vertex) {
     vertex.N_v = 0;
     return 0;
 }
-int Save_point_arr(const vertex_arr &vertex, std::ofstream &out)
+int Save_point_arr(const vertex_arr &vertex, OUT_Stream &stream)
 {
-    if(!out)
-        return FILE_NOT_FIND;
-    out << vertex.N_v << std::endl;
-    for(int i = 0; i < vertex.N_v; i++) {
-        Save_point(out, vertex.arr[i]);
+    char buff[BUFF_SIZE];
+    snprintf(buff, BUFF_SIZE, "%d\n", vertex.N_v);
+    int ret = Print_Stream(stream, buff);
+
+    for(int i = 0; i < vertex.N_v && !ret; i++) {
+        ret = Save_point(vertex.arr[i], stream);
     }
-    return 0;
+    return ret;
 }
 
 int Rotate_point_arr(vertex_arr &vertex, const Rotate &act)

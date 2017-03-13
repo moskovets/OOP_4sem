@@ -1,27 +1,34 @@
 #include "point.h"
 #include "draw_on_scene.h"
 #include "errors.h"
-int Load_point(std::ifstream &inp, Point& p)
+#include "stdio.h"
+
+#define BUFF_SIZE 100
+
+int Load_point(Point& p, IN_Stream &stream)
 {
     double x, y, z;
-    if(inp >> x && inp >> y && inp >> z) {
+    int ret = 0;
+    ret = Read_Stream(x, stream);
+    if(!ret)
+        ret = Read_Stream(y, stream);
+    if(!ret)
+        ret = Read_Stream(z, stream);
+
+    if(!ret) {
         p.x = x;
         p.y = y;
         p.z = z;
     }
-    else {
-        return FILE_ERROR;
-    }
-    return 0;
+    return ret;
 }
 
 
-int Save_point(std::ofstream &out, const Point& p)
+int Save_point(const Point& p, OUT_Stream &stream)
 {
-    if(!out)
-        return FILE_NOT_FIND;
-    out << p.x << " " << p.y << " " << p.z << std::endl;
-    return 0;
+    char buff[BUFF_SIZE];
+    snprintf(buff, BUFF_SIZE, "%f %f %f\n", p.x, p.y, p.z);
+    return Print_Stream(stream, buff);
 }
 
 int Mult(t_vect vec, const t_matrix a)
