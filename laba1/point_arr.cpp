@@ -58,8 +58,8 @@ int Rotate_point_arr(vertex_arr &vertex, const Rotate &act)
     if(!vertex.arr)
         return MODEL_EMPTY;
     t_matrix m;
-    int ret = 0;
     GetResultMatrix(m, act);
+    int ret = 0;
     for(int i = 0; i < vertex.N_v && !ret; ++i) {
         ret = Change_Point_with_matrix(vertex.arr[i], m);
     }
@@ -70,9 +70,8 @@ int Scale_point_arr(vertex_arr &vertex, const Scale &act)
     if(!vertex.arr)
         return MODEL_EMPTY;
 
-    t_matrix m = { { act.kx, 0, 0 },
-                   { 0, act.ky, 0 },
-                   { 0, 0, act.kz } };
+    t_matrix m;
+    GetResultMatrix(m, act);
     int ret = 0;
     for(int i = 0; i < vertex.N_v && !ret; ++i) {
         ret = Change_Point_with_matrix(vertex.arr[i], m);
@@ -84,9 +83,12 @@ int Move_point_arr(vertex_arr &vertex, const Move &act)
 {
     if(!vertex.arr)
         return MODEL_EMPTY;
+
+    t_matrix m;
+    GetResultMatrix(m, act);
     int ret = 0;
     for(int i = 0; i < vertex.N_v && !ret; ++i) {
-        ret = Move_point(vertex.arr[i], act);
+        ret = Change_Point_with_matrix(vertex.arr[i], m);
     }
     return ret;
 }

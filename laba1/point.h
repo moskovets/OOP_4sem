@@ -8,7 +8,7 @@
 
 #include <math.h>
 #include <fstream>
-#define  N_DIMEN 3 //DIMENSIONALITY
+#define  N_DIMEN 4 //DIMENSIONALITY
 
 struct Point {
     double x;
@@ -25,12 +25,12 @@ typedef double t_vect[N_DIMEN];
 //получние результирующей матрицы поворота по 3-м углам
 void GetResultMatrix(t_matrix a, const Rotate &act);
 
+void GetResultMatrix(t_matrix a, const Scale &act);
+void GetResultMatrix(t_matrix a, const Move &act);
+
 //конвертация точки в вектор
 int From_vec_to_Point(Point &p, const t_vect &vec);
 int From_Point_to_vec(t_vect &vec, const Point &p);
-
-//перенос одной точки
-int Move_point(Point &p, const Move &act);
 
 //Применение матрицы преобразований к одной точке
 int Change_Point_with_matrix(Point &p, const t_matrix &m_rotate);

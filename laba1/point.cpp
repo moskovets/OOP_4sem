@@ -56,6 +56,14 @@ void Mult_matrix(t_matrix res, const t_matrix a, const t_matrix b)
         }
     }
 }
+void Copy_matrix(t_matrix res, const t_matrix a)
+{
+    for(int i = 0; i < N_DIMEN; i++) {
+        for(int j = 0; j < N_DIMEN; j++) {
+            res[i][j] = a[i][j];
+        }
+    }
+}
 
 void GetResultMatrix(t_matrix a, const Rotate &act)
 {
@@ -73,6 +81,21 @@ void GetResultMatrix(t_matrix a, const Rotate &act)
     Mult_matrix(a, tmp, az);
 
 }
+void GetResultMatrix(t_matrix a, const Scale &act) {
+    t_matrix m = { { act.kx, 0, 0 },
+                   { 0, act.ky, 0 },
+                   { 0, 0, act.kz } };
+    Copy_matrix(a, m);
+}
+
+void GetResultMatrix(t_matrix a, const Move &act) {
+    t_matrix m = { { 1, 0, 0, act.dx },
+                   { 0, 1, 0, act.dy },
+                   { 0, 0, 1, act.dz },
+                   { 0, 0, 0, 1 } };
+    Copy_matrix(a, m);
+}
+
 
 int From_vec_to_Point(Point &p, const t_vect &vec) {
     p.x = vec[0];
@@ -84,6 +107,7 @@ int From_Point_to_vec(t_vect &vec, const Point &p) {
     vec[0] = p.x;
     vec[1] = p.y;
     vec[2] = p.z;
+    vec[3] = 1;
     return 0;
 }
 
@@ -97,14 +121,6 @@ int Change_Point_with_matrix(Point &p, const t_matrix &m_rotate) {
     if(!ret)
         ret = From_vec_to_Point(p, vec);
     return ret;
-}
-
-int Move_point(Point &p, const Move &act)
-{
-    p.x += act.dx;
-    p.y += act.dy;
-    p.z += act.dz;
-    return 0;
 }
 
 int Draw_line(My_Scene &scene, const Point &a, const Point &b) {
