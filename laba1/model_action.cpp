@@ -18,6 +18,10 @@ Model Init_model() {
     return model;
 }
 
+int Is_init_model(const Model &model) {
+    return Get_N_vertex(model);
+}
+
 int Rotate_model(Model &model, const Rotate &act) {
     return Rotate_point_arr(model.vertex, act);
 }
@@ -71,9 +75,8 @@ int Free_model(Model &model) {
 
 
 int Draw_model(My_Scene &scene, const Model &model) {
-    int N_v = Get_N_vertex(model);
     int N_e = Get_N_edges(model);
-    if(N_v == 0)
+    if(Is_init_model(model))
         return MODEL_EMPTY;
     Clean_Scene(scene);
 

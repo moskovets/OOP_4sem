@@ -6,6 +6,7 @@
 #include "my_scene.h"
 
 Model Init_model();
+int Is_init_model(const Model &model);
 
 //преобразование модели
 int Rotate_model(Model &model, const Rotate &act);
