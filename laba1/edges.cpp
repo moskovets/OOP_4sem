@@ -3,6 +3,8 @@
 #include "stdio.h"
 
 #define BUFF_SIZE 100
+int Check_number_vertex(int n, int min_n, int max_n);
+
 edges_arr Init_edges()
 {
     edges_arr edges;
@@ -11,7 +13,7 @@ edges_arr Init_edges()
     return edges;
 }
 
-int Load_edge_arr(edges_arr &edges, IN_Stream &stream)
+int Load_edge_arr(edges_arr &edges, IN_Stream &stream, int max_vertex)
 {
     int N;
     int ret = 0;
@@ -23,19 +25,25 @@ int Load_edge_arr(edges_arr &edges, IN_Stream &stream)
     ret = Allocate_Edge_arr(edges);
 
     for(int i = 0; i < N && !ret; i++) {
-        ret = Load_edge(edges.arr[i], stream);
+        ret = Load_edge(edges.arr[i], stream, max_vertex);
     }
     if(ret) {
         Free_Edge_arr(edges);
     }
     return ret;
 }
-int Load_edge(t_edge& p, IN_Stream &stream)
+int Check_number_vertex(int n, int min_n, int max_n) {
+    return n >= min_n && n <= max_n;
+}
+int Load_edge(t_edge &p, IN_Stream &stream, int max_vertex)
 {
     int x, y;
     int ret = Read_Stream(x, stream);
     if(!ret)
         ret = Read_Stream(y, stream);
+    if(!(Check_number_vertex(x, 1, max_vertex) && Check_number_vertex(y, 1, max_vertex))) {
+        return FILE_ERROR;
+    }
 
     if(!ret) {
         p[0] = x - 1;

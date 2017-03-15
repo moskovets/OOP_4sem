@@ -47,8 +47,9 @@ int SaveModel(const Model &model, const Create &act) {
 }
 int LoadModel(Model &model, IN_Stream &stream) {
     int ret = Load_point_arr(model.vertex, stream);
+    int N_v = Get_N_vertex(model.vertex);
     if(!ret)
-        ret = Load_edge_arr(model.edges, stream);
+        ret = Load_edge_arr(model.edges, stream, N_v);
     return ret;
 }
 
@@ -76,7 +77,7 @@ int Free_model(Model &model) {
 
 int Draw_model(My_Scene &scene, const Model &model) {
     int N_e = Get_N_edges(model);
-    if(Is_init_model(model))
+    if(!Is_init_model(model))
         return MODEL_EMPTY;
     Clean_Scene(scene);
 

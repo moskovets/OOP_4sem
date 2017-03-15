@@ -11,8 +11,8 @@ struct edges_arr {
 
 edges_arr Init_edges();
 
-int Load_edge_arr(edges_arr &edges, IN_Stream &stream);
-int Load_edge(t_edge& p, IN_Stream &stream);
+int Load_edge_arr(edges_arr &edges, IN_Stream &stream, int max_vertex);
+int Load_edge(t_edge& p, IN_Stream &stream, int max_vertex);
 int Allocate_Edge_arr(edges_arr &edges);
 int Free_Edge_arr(edges_arr &edges);
 
