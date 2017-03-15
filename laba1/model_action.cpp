@@ -8,6 +8,9 @@
 #include <stdlib.h>
 #include <iostream>
 #include "draw_on_scene.h"
+
+int LoadModel(Model &model, IN_Stream &stream);
+
 Model Init_model() {
     Model model;
     model.vertex = Init_vertex();
@@ -38,7 +41,12 @@ int SaveModel(const Model &model, const Create &act) {
     return ret;
 
 }
-
+int LoadModel(Model &model, IN_Stream &stream) {
+    int ret = Load_point_arr(model.vertex, stream);
+    if(!ret)
+        ret = Load_edge_arr(model.edges, stream);
+    return ret;
+}
 
 int LoadModel(Model &model, const Create &act) {
     IN_Stream stream;
@@ -46,9 +54,7 @@ int LoadModel(Model &model, const Create &act) {
     if(ret)
         return ret;
     Model buff;
-    ret = Load_point_arr(buff.vertex, stream);
-    if(!ret)
-        ret = Load_edge_arr(buff.edges, stream);
+    ret = LoadModel(buff, stream);
     if(!ret)
         ret = Free_model(model);
     if(!ret)
