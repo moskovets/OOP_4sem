@@ -23,7 +23,7 @@ public:
 
     CMathVector<T> &operator-=(const CMathVector<T> &obj);
 
-    CMathVector<T> &operator-();
+    CMathVector<T> &operator-() const;
 
     CMathVector<T> &operator+();
 
