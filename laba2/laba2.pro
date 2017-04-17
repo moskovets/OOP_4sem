@@ -18,5 +18,7 @@ SOURCES += main.cpp \
 
 HEADERS  += \
     cexception.h \
-    cbasevector.h
+    cbasevector.h \
+    cmathvector.h \
+    cmathvector_imp.h
 

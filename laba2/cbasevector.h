@@ -1,6 +1,7 @@
 #ifndef CBASEVECTOR_H
 #define CBASEVECTOR_H
 #include "iostream"
+#include "cexception.h"
 
 class CBaseVector
 {
