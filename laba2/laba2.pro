@@ -14,9 +14,9 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     cexception.cpp \
-    basevector.cpp
+    cbasevector.cpp
 
 HEADERS  += \
     cexception.h \
-    basevector.h
+    cbasevector.h
 
