@@ -53,18 +53,25 @@ T CMathVector<T>::GetAbsoluteValue() const
 }
 
 template <typename T>
-T CMathVector<T>::GetElement(int index) const
+T CMathVector<T>::GetElement(unsigned int index) const
 {
-    if(index < 0 || index >= this->size())
+    if(index >= this->size())
         throw CRangeError();
 
     return arr[index];
 }
-
 template <typename T>
-void CMathVector<T>::SetElement(int index, const T &value)
+T& CMathVector<T>::GetElement(unsigned int index)
 {
-    if(index < 0 || index >= this->size())
+    if(index >= this->size())
+        throw CRangeError();
+
+    return arr[index];
+}
+template <typename T>
+void CMathVector<T>::SetElement(unsigned int index, const T &value)
+{
+    if(index >= this->size())
         throw CRangeError();
 
     arr[index] = value;
@@ -90,6 +97,33 @@ bool operator==(const CMathVector<U> &a, const CMathVector<U> &b)
     return a.GetAbsoluteValue() == b.GetAbsoluteValue();
 }
 
+template <typename T>
+CMathVector<T> &CMathVector<T>::operator[](unsigned int index)
+{
+    if(index >= this->size())
+        throw CRangeError();
+
+    return arr[index];
+}
+
+template <typename T>
+CMathVector<T> CMathVector<T>::operator[](unsigned int index) const
+{
+    if(index >= this->size())
+        throw CRangeError();
+
+    return arr[index];
+}
+
+template <typename T>
+CMathVector<T> &CMathVector<T>::operator-() const
+{
+    CMathVector<T> res(this->size());
+    for(int i = 0; i < n; i++) {
+        res.arr[i] = -arr[i];
+    }
+    return res;
+}
 
 template <typename T>
 CMathVector<T> &CMathVector<T>::operator =(const CMathVector<T> &obj)

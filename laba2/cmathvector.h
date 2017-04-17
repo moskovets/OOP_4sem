@@ -23,11 +23,18 @@ public:
 
     CMathVector<T> &operator-=(const CMathVector<T> &obj);
 
+    CMathVector<T> &operator-();
+
+    CMathVector<T> &operator+();
+
+    CMathVector<T> operator[](unsigned int index) const;
+
     T GetAbsoluteValue() const;
 
-    T GetElement(int index) const;
+    T GetElement(unsigned int index) const;
+    T& GetElement(unsigned int index);
 
-    void SetElement(int index, const T &value);
+    void SetElement(unsigned int index, const T &value);
 
     T operator*(const CMathVector<T> &obj);
 
@@ -35,7 +42,7 @@ public:
     friend bool operator==(const CMathVector<U> &a, const CMathVector<U> &b);
 
     template <typename U>
-    friend bool operator<(const CMathVector<U> &a, const CMathVector<U> &b);
+    friend bool operator<(const CMathVector<U> &a, const CMathVector<U> &b); //TODO
 
     template <typename U>
     friend CMathVector<U> operator+(const CMathVector<U> &a, const CMathVector<U> &b);
