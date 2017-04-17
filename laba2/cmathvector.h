@@ -17,6 +17,42 @@ public:
 
     ~CMathVector();
 
+    CMathVector<T> &operator= (const CMathVector<T> &obj);
+
+    CMathVector<T> &operator+=(const CMathVector<T> &obj);
+
+    CMathVector<T> &operator-=(const CMathVector<T> &obj);
+
+    T GetAbsoluteValue() const;
+
+    T GetElement(int index) const;
+
+    void SetElement(int index, const T &value);
+
+    T operator*(const CMathVector<T> &obj);
+
+    template <typename U>
+    friend CMathVector<U> operator+(const CMathVector<U> &obj);
+
+    template <typename U>
+    friend CMathVector<U> operator-(const CMathVector<U> &obj);
+
+    template <typename U>
+    friend CMathVector<U> operator+(U &value);
+
+    template <typename U>
+    friend CMathVector<U> operator-(U &value);
+
+    template <typename U>
+    friend CMathVector<U> operator*(U &value);
+
+    template <typename U>
+    friend CMathVector<U> operator/(U &value);
+
+    template <typename U>
+    friend std::ostream& operator <<(std::ostream& os, const CMathVector<U> &obj);
+
+
 private:
 
     T* arr = nullptr;
