@@ -1,21 +1,21 @@
-#include "basevector.h"
+#include "cbasevector.h"
 
 
-BaseVector::BaseVector() : length(0) {}
+CBaseVector::CBaseVector() : length(0) {}
 
-BaseVector::BaseVector(size_t len) : length(len) {}
+CBaseVector::CBaseVector(size_t len) : length(len) {}
 
-BaseVector::~BaseVector()
+CBaseVector::~CBaseVector()
 {
     length = 0;
 }
 
-size_t BaseVector::size() const
+size_t CBaseVector::size() const
 {
     return length;
 }
 
-bool BaseVector::empty() const
+bool CBaseVector::empty() const
 {
     return length;
 }
