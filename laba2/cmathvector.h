@@ -27,7 +27,8 @@ public:
 
     CMathVector<T> &operator+();
 
-    CMathVector<T> operator[](unsigned int index) const;
+    T operator[](unsigned int index) const;
+    T& operator[](unsigned int index);
 
     T GetAbsoluteValue() const;
 

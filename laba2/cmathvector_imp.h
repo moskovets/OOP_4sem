@@ -5,6 +5,7 @@
 template <typename T>
 CMathVector<T>::CMathVector(size_t n) : CBaseVector(n)
 {
+    std::cout << "ok\n";
     arr = new T[n];
     if(!arr)
         throw CMemoryError();
@@ -46,7 +47,7 @@ template <typename T>
 T CMathVector<T>::GetAbsoluteValue() const
 {
     T res = 0;
-    for(int i = 0; i < obj.size(); i++) {
+    for(int i = 0; i < this->size(); i++) {
         res += arr[i] * arr[i];
     }
     return res;
@@ -98,7 +99,7 @@ bool operator==(const CMathVector<U> &a, const CMathVector<U> &b)
 }
 
 template <typename T>
-CMathVector<T> &CMathVector<T>::operator[](unsigned int index)
+T &CMathVector<T>::operator[](unsigned int index)
 {
     if(index >= this->size())
         throw CRangeError();
@@ -107,7 +108,7 @@ CMathVector<T> &CMathVector<T>::operator[](unsigned int index)
 }
 
 template <typename T>
-CMathVector<T> CMathVector<T>::operator[](unsigned int index) const
+T CMathVector<T>::operator[](unsigned int index) const
 {
     if(index >= this->size())
         throw CRangeError();
@@ -119,7 +120,7 @@ template <typename T>
 CMathVector<T> &CMathVector<T>::operator-() const
 {
     CMathVector<T> res(this->size());
-    for(int i = 0; i < n; i++) {
+    for(int i = 0; i < this->size(); i++) {
         res.arr[i] = -arr[i];
     }
     return res;
@@ -128,6 +129,9 @@ CMathVector<T> &CMathVector<T>::operator-() const
 template <typename T>
 CMathVector<T> &CMathVector<T>::operator =(const CMathVector<T> &obj)
 {
+    //(*this) = CMathVector(obj);
+    //return *this;
+
     if(obj.size() != this->size())
         throw CSizeError();
     memcpy(arr, obj.arr, obj.size() * sizeof(T));
@@ -167,7 +171,7 @@ CMathVector<U> operator+(const CMathVector<U> &a, const CMathVector<U> &b)
     CMathVector<U> res(b.size());
 
     for(int i = 0; i < b.size(); i++) {
-        res = a.arr[i] + b.arr[i];
+        res.arr[i] = a.arr[i] + b.arr[i];
     }
     return res;
 }
@@ -178,19 +182,19 @@ CMathVector<U> operator+(const CMathVector<U> &a, U &value)
     CMathVector<U> res(a.size());
 
     for(int i = 0; i < a.size(); i++) {
-        res = a.arr[i] + value;
+        res.arr[i] = a.arr[i] + value;
     }
     return res;
 }
 
 template <typename U>
-friend std::ostream& operator <<(std::ostream& os, const CMathVector<U> &obj)
+std::ostream& operator <<(std::ostream& os, const CMathVector<U> &obj)
 {
     os << "[";
     for(int i = 0; i < obj.size(); i++) {
         os << obj.arr[i] << ", ";
     }
-    os << "]\n";
+    os << "]" << std::endl;
 }
 
 
