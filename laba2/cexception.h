@@ -6,7 +6,6 @@
 
 class CBaseException : public std::exception
 {
-
 public:
 
     const char *what()
@@ -42,4 +41,27 @@ private:
     char *msg = nullptr;
 };
 
+class CMemoryError : public CBaseException
+{
+public:
+
+    explicit CMemoryError() : CBaseException("Error memory allocate") {}
+
+};
+
+class CRangeError : public CBaseException
+{
+public:
+
+    explicit CRangeError() : CBaseException("Error out of range") {}
+
+};
+
+class CSizeError : public CBaseException
+{
+public:
+
+    explicit CSizeError() : CBaseException("Error size") {}
+
+};
 #endif // CEXCEPTION_H
