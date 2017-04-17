@@ -32,22 +32,28 @@ public:
     T operator*(const CMathVector<T> &obj);
 
     template <typename U>
-    friend CMathVector<U> operator+(const CMathVector<U> &obj);
+    friend bool operator==(const CMathVector<U> &a, const CMathVector<U> &b);
 
     template <typename U>
-    friend CMathVector<U> operator-(const CMathVector<U> &obj);
+    friend bool operator<(const CMathVector<U> &a, const CMathVector<U> &b);
 
     template <typename U>
-    friend CMathVector<U> operator+(U &value);
+    friend CMathVector<U> operator+(const CMathVector<U> &a, const CMathVector<U> &b);
 
     template <typename U>
-    friend CMathVector<U> operator-(U &value);
+    friend CMathVector<U> operator-(const CMathVector<U> &a, const CMathVector<U> &b);
 
     template <typename U>
-    friend CMathVector<U> operator*(U &value);
+    friend CMathVector<U> operator+(const CMathVector<U> &a, U &value);
 
     template <typename U>
-    friend CMathVector<U> operator/(U &value);
+    friend CMathVector<U> operator-(const CMathVector<U> &a, U &value);
+
+    template <typename U>
+    friend CMathVector<U> operator*(const CMathVector<U> &a, U &value);
+
+    template <typename U>
+    friend CMathVector<U> operator/(const CMathVector<U> &a, U &value);
 
     template <typename U>
     friend std::ostream& operator <<(std::ostream& os, const CMathVector<U> &obj);

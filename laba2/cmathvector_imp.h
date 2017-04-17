@@ -82,6 +82,15 @@ T CMathVector<T>::operator*(const CMathVector<T> &obj)
     return res;
 }
 
+template <typename U>
+bool operator==(const CMathVector<U> &a, const CMathVector<U> &b)
+{
+    if(a.size() != b.size())
+        throw CSizeError();
+    return a.GetAbsoluteValue() == b.GetAbsoluteValue();
+}
+
+
 template <typename T>
 CMathVector<T> &CMathVector<T>::operator =(const CMathVector<T> &obj)
 {
@@ -116,26 +125,26 @@ CMathVector<T> &CMathVector<T>::operator -=(const CMathVector<T> &obj)
 }
 
 template <typename U>
-CMathVector<U> operator+(const CMathVector<U> &obj)
+CMathVector<U> operator+(const CMathVector<U> &a, const CMathVector<U> &b)
 {
-    if(obj.size() != this->size())
+    if(b.size() != a.size())
         throw CSizeError();
 
-    CMathVector<U> res(obj.size());
+    CMathVector<U> res(b.size());
 
-    for(int i = 0; i < obj.size(); i++) {
-        res = arr[i] + obj.arr[i];
+    for(int i = 0; i < b.size(); i++) {
+        res = a.arr[i] + b.arr[i];
     }
     return res;
 }
 
 template <typename U>
-CMathVector<U> operator+(U &value)
+CMathVector<U> operator+(const CMathVector<U> &a, U &value)
 {
-    CMathVector<U> res(this->size());
+    CMathVector<U> res(a.size());
 
-    for(int i = 0; i < this->size(); i++) {
-        res = arr[i] + value;
+    for(int i = 0; i < a.size(); i++) {
+        res = a.arr[i] + value;
     }
     return res;
 }
