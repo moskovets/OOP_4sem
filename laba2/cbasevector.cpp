@@ -10,12 +10,12 @@ CBaseVector::~CBaseVector()
     length = 0;
 }
 
-size_t CBaseVector::size() const
+size_t CBaseVector::Size() const
 {
     return length;
 }
 
-bool CBaseVector::empty() const
+bool CBaseVector::Empty() const
 {
     return length;
 }

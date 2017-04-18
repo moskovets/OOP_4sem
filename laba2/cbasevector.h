@@ -13,9 +13,9 @@ public:
 
     virtual ~CBaseVector();
 
-    size_t size() const;
+    size_t Size() const;
 
-    bool empty() const;
+    bool Empty() const;
 
 protected:
     size_t length;

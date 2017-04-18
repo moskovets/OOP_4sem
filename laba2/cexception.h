@@ -22,6 +22,14 @@ public:
         if(!msg) { return; } //???????????????
         strcpy(msg, error);
     }
+    explicit CBaseException(char *error, char *addmsg)
+    {
+        int n = strlen(error) + strlen(addmsg);
+        msg = new char[n];
+        if(!msg) { return; } //???????????????
+        strcpy(msg, error);
+        strcat(msg, addmsg);
+    }
 
     explicit CBaseException(std::string &error)
     {
@@ -46,6 +54,7 @@ class CMemoryError : public CBaseException
 public:
 
     explicit CMemoryError() : CBaseException("Error memory allocate") {}
+    explicit CMemoryError(char *addmsg) : CBaseException("Error memory allocate", addmsg) {}
 
 };
 
