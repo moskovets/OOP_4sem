@@ -23,7 +23,7 @@ public:
 
     CMathVector<T> &operator-=(const CMathVector<T> &obj);
 
-    CMathVector<T> &operator-() const;
+    //CMathVector<T> operator-() const;
 
     CMathVector<T> &operator+();
 
@@ -64,6 +64,9 @@ public:
     friend CMathVector<U> operator/(const CMathVector<U> &a, U &value);
 
     template <typename U>
+    friend CMathVector<U> operator-(const CMathVector<U> &a);
+
+    template <typename U>
     friend std::ostream& operator <<(std::ostream& os, const CMathVector<U> &obj);
 
 
@@ -72,4 +75,5 @@ private:
     T* arr = nullptr;
 };
 
+#include <cmathvector_imp.h>
 #endif // CMATHVECTOR_H

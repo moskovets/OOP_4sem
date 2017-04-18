@@ -97,7 +97,13 @@ bool operator==(const CMathVector<U> &a, const CMathVector<U> &b)
         throw CSizeError();
     return a.GetAbsoluteValue() == b.GetAbsoluteValue();
 }
-
+template <typename U>
+bool operator<(const CMathVector<U> &a, const CMathVector<U> &b)
+{
+    if(a.size() != b.size())
+        throw CSizeError();
+    return a.GetAbsoluteValue() < b.GetAbsoluteValue();
+}
 template <typename T>
 T &CMathVector<T>::operator[](unsigned int index)
 {
@@ -116,12 +122,22 @@ T CMathVector<T>::operator[](unsigned int index) const
     return arr[index];
 }
 
-template <typename T>
-CMathVector<T> &CMathVector<T>::operator-() const
+/*template <typename T>
+CMathVector<T> CMathVector<T>::operator-() const
 {
     CMathVector<T> res(this->size());
     for(int i = 0; i < this->size(); i++) {
         res.arr[i] = -arr[i];
+    }
+    return res;
+}*/
+
+template <typename U>
+CMathVector<U> operator-(const CMathVector<U> &a)
+{
+    CMathVector<U> res(a.size());
+    for(int i = 0; i < a.size(); i++) {
+        res.arr[i] = -a.arr[i];
     }
     return res;
 }
