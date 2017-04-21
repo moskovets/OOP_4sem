@@ -22,5 +22,7 @@ HEADERS  += \
     cmathvector.h \
     cmathvector_imp.h \
     cbaseiterator_imp.h \
-    cbaseiterator.h
+    cbaseiterator.h \
+    cvectoriterator.h \
+    cvectoriterator_imp.h
 
