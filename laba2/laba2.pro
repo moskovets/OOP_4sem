@@ -20,5 +20,7 @@ HEADERS  += \
     cexception.h \
     cbasevector.h \
     cmathvector.h \
-    cmathvector_imp.h
+    cmathvector_imp.h \
+    cbaseiterator_imp.h \
+    cbaseiterator.h
 
