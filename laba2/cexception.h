@@ -3,46 +3,25 @@
 #include <exception>
 #include <cstring>
 #include <string>
+#include "QDebug"
 
 class CBaseException : public std::exception
 {
 public:
 
-    const char *what()
-    {
-        return msg;
-    }
+    const char *what();
 
     explicit CBaseException() = default;
 
-    explicit CBaseException(char *error)
-    {
-        int n = strlen(error);
-        msg = new char[n];
-        if(!msg) { return; } //???????????????
-        strcpy(msg, error);
-    }
-    explicit CBaseException(char *error, char *addmsg)
-    {
-        int n = strlen(error) + strlen(addmsg);
-        msg = new char[n];
-        if(!msg) { return; } //???????????????
-        strcpy(msg, error);
-        strcat(msg, addmsg);
-    }
+    explicit CBaseException(const char *error);
 
-    explicit CBaseException(std::string &error)
-    {
-        int n = error.size();
-        msg = new char[n];
-        if(!msg) { return; } //???????????????
-        strcpy(msg, error.c_str());
-    }
+    explicit CBaseException(const char *error, const char *addmsg);
 
-    ~CBaseException()
-    {
-        delete[] msg;
-    }
+    explicit CBaseException(const std::string &error);
+
+    CBaseException(const CBaseException &ex);
+
+    ~CBaseException();
 
 private:
 
@@ -53,16 +32,32 @@ class CMemoryError : public CBaseException
 {
 public:
 
-    explicit CMemoryError() : CBaseException("Error memory allocate") {}
-    explicit CMemoryError(char *addmsg) : CBaseException("Error memory allocate", addmsg) {}
+    explicit CMemoryError();
+
+    explicit CMemoryError(char *addmsg);
+
+    explicit CMemoryError(std::string addmsg);
+
+private:
+
+    static const char defaultMsg[];
 
 };
+
 
 class CRangeError : public CBaseException
 {
 public:
 
-    explicit CRangeError() : CBaseException("Error out of range") {}
+    explicit CRangeError();
+
+    explicit CRangeError(char *addmsg);
+
+    explicit CRangeError(std::string addmsg);
+
+private:
+
+    static const char defaultMsg[];
 
 };
 
@@ -70,7 +65,16 @@ class CSizeError : public CBaseException
 {
 public:
 
-    explicit CSizeError() : CBaseException("Error size") {}
+    explicit CSizeError();
+
+    explicit CSizeError(char *addmsg);
+
+    explicit CSizeError(std::string addmsg);
+
+private:
+
+    static const char defaultMsg[];
+//    explicit CSizeError() : CBaseException("Error size") {}
 
 };
 #endif // CEXCEPTION_H
