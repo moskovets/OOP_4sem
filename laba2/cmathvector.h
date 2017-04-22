@@ -1,6 +1,7 @@
 #ifndef CMATHVECTOR_H
 #define CMATHVECTOR_H
 #include "cbasevector.h"
+#include "cvectoriterator.h"
 
 template <typename T>
 class CMathVector : public CBaseVector
@@ -16,6 +17,14 @@ public:
     CMathVector(CMathVector<T> &&obj);
 
     ~CMathVector();
+
+    CVectorIterator<T>& begin();
+
+    CVectorIterator<T>& end();
+
+    CConstVectorIterator<T>& begin() const;
+
+    CConstVectorIterator<T>& end() const;
 
     CMathVector<T> &operator= (const CMathVector<T> &obj);
 

@@ -8,6 +8,9 @@ CMathVector<T>::CMathVector(size_t n) : CBaseVector(n)
     arr = new T[n]; //нулями нужно забивать?
     if(!arr)
         throw CMemoryError();
+    for(int i = 0; i < n; i++) {
+        arr[i] = 0;
+    }
 }
 
 template <typename T>
@@ -263,6 +266,28 @@ std::ostream& operator <<(std::ostream& os, const CMathVector<U> &obj)
     os << "]" << std::endl;
 }
 
+template <typename T>
+CVectorIterator<T>& CMathVector<T>::begin()
+{
+    return CVectorIterator<T>(&arr[0]);
+}
 
+template <typename T>
+CVectorIterator<T>& CMathVector<T>::end()
+{
+    return CVectorIterator<T>(&arr[this->Size() - 1]);
+}
+
+template <typename T>
+CConstVectorIterator<T>& CMathVector<T>::begin() const
+{
+    return CConstVectorIterator<T>(&arr[0]);
+}
+
+template <typename T>
+CConstVectorIterator<T>& CMathVector<T>::end() const
+{
+    return CConstVectorIterator<T>(&arr[this->Size() - 1]);
+}
 
 #endif // CMATHVECTOR_IMP_H

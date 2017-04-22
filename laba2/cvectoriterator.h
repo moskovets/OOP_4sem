@@ -8,7 +8,8 @@ template <typename T>
 class CVectorIterator : public CBaseIterator<T>
 {
 public:
-    CVectorIterator(const CVectorIterator<T> &iter) {}
+
+    CVectorIterator(const CVectorIterator<T> &iter);
 
     T& operator*();
 
@@ -18,22 +19,33 @@ public:
 
     const T operator->() const;
 
-    friend class CMathVector<T>;
+    friend class CMathVector;
+
+private:
+
+    CVectorIterator(T *p);
+
 };
 
 template <typename T>
 class CConstVectorIterator : public CBaseIterator<T>
 {
 public:
-    CConstVectorIterator(const CConstVectorIterator<T> &iter) {}
+
+    CConstVectorIterator(const CConstVectorIterator<T> &iter);
 
     const T operator*() const;
 
     const T operator->() const;
 
-    friend class CMathVector<T>;
+    friend class CMathVector;
+
+private:
+
+    CConstVectorIterator(T *p);
 };
 
 #include "cvectoriterator_imp.h"
 
 #endif // CVECTORITERATOR_H
+
