@@ -27,4 +27,15 @@ const T CVectorIterator<T>::operator->() const
     return this->ptr;
 }
 
+template <typename T>
+const T CConstVectorIterator<T>::operator*() const
+{
+    return *(this->ptr);
+}
+
+template <typename T>
+const T CConstVectorIterator<T>::operator->() const
+{
+    return this->ptr;
+}
 #endif // CVECTORITERATOR_IMP_H
