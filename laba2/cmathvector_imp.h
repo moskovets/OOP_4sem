@@ -46,7 +46,10 @@ namespace myVector
     CMathVector<T>::CMathVector(CMathVector<T>&& obj) : vectorBase::CBaseVector(obj.Size())
     {
         arr = obj.arr;
-        obj.arr = 0;
+        this->length = obj.length;
+
+        obj.arr = nullptr;
+        obj.length = 0;
     }
 
     template <typename T>
@@ -183,6 +186,7 @@ namespace myVector
 
         delete[] arr;
         arr = new_arr;
+        this->length = obj.Size();
         return *this;
     }
 
