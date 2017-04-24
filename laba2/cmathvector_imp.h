@@ -31,6 +31,18 @@ namespace myVector
     }
 
     template <typename T>
+    CMathVector<T>::CMathVector(const std::initializer_list<T>& list) : vectorBase::CBaseVector(list.size())
+    {
+        try {
+            arr = new T[list.size()];
+        }
+        catch (std::bad_alloc) {
+            throw CMemoryError();
+        }
+        std::copy(list.begin(), list.end(), arr);
+    }
+
+    template <typename T>
     CMathVector<T>::CMathVector(const CMathVector<T>& obj) : vectorBase::CBaseVector(obj.Size())
     {
         try {
@@ -307,19 +319,19 @@ namespace myVector
     template <typename T>
     CVectorIterator<T> CMathVector<T>::end()
     {
-        return CVectorIterator<T>(&arr[this->Size() - 1]);
+        return CVectorIterator<T>(arr + this->Size());
     }
 
     template <typename T>
     CConstVectorIterator<T> CMathVector<T>::begin() const
     {
-        return CConstVectorIterator<T>(&arr[0]);
+        return CConstVectorIterator<T>(arr);
     }
 
     template <typename T>
     CConstVectorIterator<T> CMathVector<T>::end() const
     {
-        return CConstVectorIterator<T>(&arr[this->Size() - 1]);
+        return CConstVectorIterator<T>(arr + this->Size());
     }
 }
 #endif // CMATHVECTOR_IMP_H

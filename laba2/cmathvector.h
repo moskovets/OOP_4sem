@@ -16,6 +16,8 @@ namespace myVector
 
         CMathVector(std::size_t n, const T* array);
 
+        CMathVector(const std::initializer_list<T>& list);
+
         CMathVector(const CMathVector<T>& obj);
 
         CMathVector(CMathVector<T>&& obj);

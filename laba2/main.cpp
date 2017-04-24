@@ -10,6 +10,9 @@ int main()
     myVector::CMathVector<int> vect(5);// = myVector::CMathVector<int>(5);
     string t = "hey";
 
+    myVector::CMathVector<int> vect2 = { 0, 2, 3, 4, 5 };
+    cout << vect2 << endl;
+
 //    vect.CMathVector(5);
     vect[0] = 1;
     vect[1] = 2;
@@ -27,7 +30,7 @@ int main()
 
         cout << "ok\n";
 
-    myVector::CVectorIterator<int> it(vect.begin());
+    myVector::CVectorIterator<int> it = vect.begin();
     cout << "ok\n";
     cout << *it << " ";
     it++;
