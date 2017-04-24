@@ -9,7 +9,7 @@ class CVectorIterator : public CBaseIterator<T>
 {
 public:
 
-    CVectorIterator(const CVectorIterator<T> &iter);
+    CVectorIterator(const CVectorIterator<T>& iter);
 
     T& operator*();
 
@@ -19,12 +19,7 @@ public:
 
     const T operator->() const;
 
-    //friend class CMathVector;
-
     CVectorIterator(T *p);
-
-//private:
-
 
 };
 
@@ -33,17 +28,13 @@ class CConstVectorIterator : public CBaseIterator<T>
 {
 public:
 
-    CConstVectorIterator(const CConstVectorIterator<T> &iter);
+    CConstVectorIterator(const CConstVectorIterator<T>& iter);
 
     const T operator*() const;
 
     const T operator->() const;
 
-    friend class CMathVector;
-
-private:
-
-    CConstVectorIterator(T *p);
+    CConstVectorIterator(T* p);
 };
 
 #include "cvectoriterator_imp.h"

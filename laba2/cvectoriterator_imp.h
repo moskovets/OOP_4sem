@@ -4,10 +4,10 @@
 #include "cvectoriterator.h"
 
 template <typename T>
-CVectorIterator<T>::CVectorIterator(const CVectorIterator<T> &iter) : CBaseIterator<T>(iter.ptr) {}
+CVectorIterator<T>::CVectorIterator(const CVectorIterator<T>& iter) : CBaseIterator<T>(iter.ptr) {}
 
 template <typename T>
-CVectorIterator<T>::CVectorIterator(T *p) : CBaseIterator<T>(p) {}
+CVectorIterator<T>::CVectorIterator(T* p) : CBaseIterator<T>(p) {}
 
 template <typename T>
 T& CVectorIterator<T>::operator*()
@@ -35,13 +35,13 @@ const T CVectorIterator<T>::operator->() const
 
 
 template <typename T>
-CConstVectorIterator<T>::CConstVectorIterator(const CConstVectorIterator<T> &iter)
+CConstVectorIterator<T>::CConstVectorIterator(const CConstVectorIterator<T>& iter)
 {
     this->ptr = iter.ptr;
 }
 
 template <typename T>
-CConstVectorIterator<T>::CConstVectorIterator(T *p)
+CConstVectorIterator<T>::CConstVectorIterator(T* p)
 {
     this->ptr = p;
 }
