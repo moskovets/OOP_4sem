@@ -19,11 +19,12 @@ public:
 
     const T operator->() const;
 
-    friend class CMathVector;
-
-private:
+    //friend class CMathVector;
 
     CVectorIterator(T *p);
+
+//private:
+
 
 };
 

@@ -18,13 +18,13 @@ public:
 
     ~CMathVector();
 
-    CVectorIterator<T>& begin();
+    CVectorIterator<T> begin();
 
-    CVectorIterator<T>& end();
+    CVectorIterator<T> end();
 
-    CConstVectorIterator<T>& begin() const;
+    CConstVectorIterator<T> begin() const;
 
-    CConstVectorIterator<T>& end() const;
+    CConstVectorIterator<T> end() const;
 
     CMathVector<T> &operator= (const CMathVector<T> &obj);
 

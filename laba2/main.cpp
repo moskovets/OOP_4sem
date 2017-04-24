@@ -22,6 +22,14 @@ int main(int argc, char *argv[])
         cout << ex.what();
     }
 
+    cout << "ok\n";
+
+    CVectorIterator<int> it = vect.begin();
+    cout << "ok\n";
+    cout << *it << " ";
+    it++;
+    cout << *it << " ";
+
     cout << vect;
 
     //vect = -vect;

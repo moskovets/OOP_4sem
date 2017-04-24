@@ -267,25 +267,26 @@ std::ostream& operator <<(std::ostream& os, const CMathVector<U> &obj)
 }
 
 template <typename T>
-CVectorIterator<T>& CMathVector<T>::begin()
+CVectorIterator<T> CMathVector<T>::begin()
 {
-    return CVectorIterator<T>(&arr[0]);
+    CVectorIterator<T> it(arr);
+    return it;
 }
 
 template <typename T>
-CVectorIterator<T>& CMathVector<T>::end()
+CVectorIterator<T> CMathVector<T>::end()
 {
     return CVectorIterator<T>(&arr[this->Size() - 1]);
 }
 
 template <typename T>
-CConstVectorIterator<T>& CMathVector<T>::begin() const
+CConstVectorIterator<T> CMathVector<T>::begin() const
 {
     return CConstVectorIterator<T>(&arr[0]);
 }
 
 template <typename T>
-CConstVectorIterator<T>& CMathVector<T>::end() const
+CConstVectorIterator<T> CMathVector<T>::end() const
 {
     return CConstVectorIterator<T>(&arr[this->Size() - 1]);
 }
