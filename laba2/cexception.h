@@ -9,23 +9,23 @@ class CBaseException : public std::exception
 {
 public:
 
-    const char *what();
+    const char* what();
 
     explicit CBaseException() = default;
 
-    explicit CBaseException(const char *error);
+    explicit CBaseException(const char* error);
 
-    explicit CBaseException(const char *error, const char *addmsg);
+    explicit CBaseException(const char* error, const char* addmsg);
 
-    explicit CBaseException(const std::string &error);
+    explicit CBaseException(const std::string& error);
 
-    CBaseException(const CBaseException &ex);
+    CBaseException(const CBaseException& ex);
 
     ~CBaseException();
 
 private:
 
-    char *msg = nullptr;
+    char* msg = nullptr;
 };
 
 class CMemoryError : public CBaseException
@@ -34,9 +34,9 @@ public:
 
     explicit CMemoryError();
 
-    explicit CMemoryError(char *addmsg);
+    explicit CMemoryError(char* addmsg);
 
-    explicit CMemoryError(std::string addmsg);
+    explicit CMemoryError(std::string& addmsg);
 
 private:
 
@@ -51,9 +51,9 @@ public:
 
     explicit CRangeError();
 
-    explicit CRangeError(char *addmsg);
+    explicit CRangeError(char* addmsg);
 
-    explicit CRangeError(std::string addmsg);
+    explicit CRangeError(std::string& addmsg);
 
 private:
 
@@ -69,12 +69,11 @@ public:
 
     explicit CSizeError(char *addmsg);
 
-    explicit CSizeError(std::string addmsg);
+    explicit CSizeError(std::string& addmsg);
 
 private:
 
     static const char defaultMsg[];
-//    explicit CSizeError() : CBaseException("Error size") {}
 
 };
 #endif // CEXCEPTION_H

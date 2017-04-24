@@ -6,12 +6,12 @@ const char CRangeError::defaultMsg[]  = "Error out of range ";
 
 const char CSizeError::defaultMsg[]   = "Error size ";
 
-const char *CBaseException::what()
+const char* CBaseException::what()
 {
     return msg;
 }
 
-CBaseException::CBaseException(const char *error)
+CBaseException::CBaseException(const char* error)
 {
     int n = strlen(error);
     msg = new char[n];
@@ -19,7 +19,7 @@ CBaseException::CBaseException(const char *error)
     strcpy(msg, error);
 }
 
-CBaseException::CBaseException(const char *error, const char *addmsg)
+CBaseException::CBaseException(const char* error, const char* addmsg)
 {
     int n = strlen(error) + strlen(addmsg);
     msg = new char[n];
@@ -28,7 +28,7 @@ CBaseException::CBaseException(const char *error, const char *addmsg)
     strcat(msg, addmsg);
 }
 
-CBaseException::CBaseException(const std::string &error)
+CBaseException::CBaseException(const std::string& error)
 {
     int n = error.size();
     msg = new char[n];
@@ -36,7 +36,7 @@ CBaseException::CBaseException(const std::string &error)
     strcpy(msg, error.c_str());
 }
 
-CBaseException::CBaseException(const CBaseException &ex)
+CBaseException::CBaseException(const CBaseException& ex)
 {
     msg = new char[strlen(ex.msg)];
     if(!msg)
@@ -51,20 +51,20 @@ CBaseException::~CBaseException()
 
 CMemoryError::CMemoryError() : CBaseException(defaultMsg) {}
 
-CMemoryError::CMemoryError(char *addmsg) : CBaseException(defaultMsg, addmsg) {}
+CMemoryError::CMemoryError(char* addmsg) : CBaseException(defaultMsg, addmsg) {}
 
-CMemoryError::CMemoryError(std::string addmsg) : CBaseException(defaultMsg, addmsg.c_str()) {}
+CMemoryError::CMemoryError(std::string& addmsg) : CBaseException(defaultMsg, addmsg.c_str()) {}
 
 
 CRangeError::CRangeError() : CBaseException(defaultMsg) {}
 
-CRangeError::CRangeError(char *addmsg) : CBaseException(defaultMsg, addmsg) {}
+CRangeError::CRangeError(char* addmsg) : CBaseException(defaultMsg, addmsg) {}
 
-CRangeError::CRangeError(std::string addmsg) : CBaseException(defaultMsg, addmsg.c_str()) {}
+CRangeError::CRangeError(std::string& addmsg) : CBaseException(defaultMsg, addmsg.c_str()) {}
 
 
 CSizeError::CSizeError() : CBaseException(defaultMsg) {}
 
-CSizeError::CSizeError(char *addmsg) : CBaseException(defaultMsg, addmsg) {}
+CSizeError::CSizeError(char* addmsg) : CBaseException(defaultMsg, addmsg) {}
 
-CSizeError::CSizeError(std::string addmsg) : CBaseException(defaultMsg, addmsg.c_str()) {}
+CSizeError::CSizeError(std::string& addmsg) : CBaseException(defaultMsg, addmsg.c_str()) {}
