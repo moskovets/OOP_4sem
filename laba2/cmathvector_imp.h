@@ -5,9 +5,12 @@
 template <typename T>
 CMathVector<T>::CMathVector(size_t n) : CBaseVector(n)
 {
-    arr = new T[n]; //нулями нужно забивать?
-    if(!arr)
+    try {
+        arr = new T[n];
+    }
+    catch (std::bad_alloc) {
         throw CMemoryError();
+    }
     for(int i = 0; i < n; i++) {
         arr[i] = 0;
     }
@@ -16,23 +19,29 @@ CMathVector<T>::CMathVector(size_t n) : CBaseVector(n)
 template <typename T>
 CMathVector<T>::CMathVector(size_t n, const T* array) : CBaseVector(n)
 {
-    arr = new T[n];
-    if(!arr)
+    try {
+        arr = new T[n];
+    }
+    catch (std::bad_alloc) {
         throw CMemoryError();
+    }
     memcpy(arr, array, n * sizeof(T));
 }
 
 template <typename T>
-CMathVector<T>::CMathVector(const CMathVector<T> &obj) : CBaseVector(obj.Size())
+CMathVector<T>::CMathVector(const CMathVector<T>& obj) : CBaseVector(obj.Size())
 {
-    arr = new T[obj.Size()];
-    if(!arr)
+    try {
+        arr = new T[obj.Size()];
+    }
+    catch (std::bad_alloc) {
         throw CMemoryError();
+    }
     memcpy(arr, obj.arr, obj.Size() * sizeof(T));
 }
 
 template <typename T>
-CMathVector<T>::CMathVector(CMathVector<T> &&obj) : CBaseVector(obj.Size())
+CMathVector<T>::CMathVector(CMathVector<T>&& obj) : CBaseVector(obj.Size())
 {
     arr = obj.arr;
     obj.arr = 0;
@@ -63,6 +72,7 @@ T CMathVector<T>::GetElement(unsigned int index) const
 
     return arr[index];
 }
+
 template <typename T>
 T& CMathVector<T>::GetElement(unsigned int index)
 {
@@ -71,8 +81,9 @@ T& CMathVector<T>::GetElement(unsigned int index)
 
     return arr[index];
 }
+
 template <typename T>
-void CMathVector<T>::SetElement(unsigned int index, const T &value)
+void CMathVector<T>::SetElement(unsigned int index, const T& value)
 {
     if(index >= this->Size())
         throw CRangeError();
@@ -81,7 +92,7 @@ void CMathVector<T>::SetElement(unsigned int index, const T &value)
 }
 
 template <typename T>
-T CMathVector<T>::operator*(const CMathVector<T> &obj)
+T CMathVector<T>::operator*(const CMathVector<T>& obj)
 {
     if(obj.Size() != this->Size())
         throw CSizeError();
@@ -93,21 +104,25 @@ T CMathVector<T>::operator*(const CMathVector<T> &obj)
 }
 
 template <typename U>
-bool operator==(const CMathVector<U> &a, const CMathVector<U> &b)
+bool operator==(const CMathVector<U>& a, const CMathVector<U>& b)
 {
     if(a.Size() != b.Size())
         throw CSizeError();
+
     return a.GetAbsoluteValue() == b.GetAbsoluteValue();
 }
+
 template <typename U>
-bool operator<(const CMathVector<U> &a, const CMathVector<U> &b)
+bool operator<(const CMathVector<U>& a, const CMathVector<U>& b)
 {
     if(a.Size() != b.Size())
         throw CSizeError();
+
     return a.GetAbsoluteValue() < b.GetAbsoluteValue();
 }
+
 template <typename T>
-T &CMathVector<T>::operator[](unsigned int index)
+T& CMathVector<T>::operator[](unsigned int index)
 {
     if(index >= this->Size())
         throw CRangeError();
@@ -125,7 +140,7 @@ T CMathVector<T>::operator[](unsigned int index) const
 }
 
 template <typename T>
-T &CMathVector<T>::operator()(unsigned int index)
+T& CMathVector<T>::operator()(unsigned int index)
 {
     if(index >= this->Size())
         throw CRangeError();
@@ -143,7 +158,7 @@ T CMathVector<T>::operator()(unsigned int index) const
 }
 
 template <typename U>
-CMathVector<U> operator-(const CMathVector<U> &a)
+CMathVector<U> operator-(const CMathVector<U>& a)
 {
     CMathVector<U> res(a.Size());
     for(int i = 0; i < a.Size(); i++) {
@@ -153,19 +168,24 @@ CMathVector<U> operator-(const CMathVector<U> &a)
 }
 
 template <typename T>
-CMathVector<T> &CMathVector<T>::operator =(const CMathVector<T> &obj)
+CMathVector<T>& CMathVector<T>::operator =(const CMathVector<T>& obj)
 {
-    //(*this) = CMathVector(obj);
-    //return *this;
+    T* new_arr = nullptr;
+    try {
+        new_arr = new T[obj.Size()];
+    }
+    catch (std::bad_alloc) {
+        throw CMemoryError();
+    }
+    memcpy(new_arr, obj.arr, obj.Size() * sizeof(T));
 
-    if(obj.Size() != this->Size())
-        throw CSizeError();
-    memcpy(arr, obj.arr, obj.Size() * sizeof(T));
+    delete[] arr;
+    arr = new_arr;
     return *this;
 }
 
 template <typename T>
-CMathVector<T> &CMathVector<T>::operator +=(const CMathVector<T> &obj)
+CMathVector<T>& CMathVector<T>::operator +=(const CMathVector<T>& obj)
 {
     if(obj.Size() != this->Size())
         throw CSizeError();
@@ -177,7 +197,7 @@ CMathVector<T> &CMathVector<T>::operator +=(const CMathVector<T> &obj)
 }
 
 template <typename T>
-CMathVector<T> &CMathVector<T>::operator -=(const CMathVector<T> &obj)
+CMathVector<T>& CMathVector<T>::operator -=(const CMathVector<T>& obj)
 {
     if(obj.Size() != this->Size())
         throw CSizeError();
@@ -189,7 +209,7 @@ CMathVector<T> &CMathVector<T>::operator -=(const CMathVector<T> &obj)
 }
 
 template <typename U>
-CMathVector<U> operator+(const CMathVector<U> &a, const CMathVector<U> &b)
+CMathVector<U> operator+(const CMathVector<U>& a, const CMathVector<U>& b)
 {
     if(b.Size() != a.Size())
         throw CSizeError();
@@ -201,8 +221,9 @@ CMathVector<U> operator+(const CMathVector<U> &a, const CMathVector<U> &b)
     }
     return res;
 }
+
 template <typename U>
-CMathVector<U> operator-(const CMathVector<U> &a, const CMathVector<U> &b)
+CMathVector<U> operator-(const CMathVector<U>& a, const CMathVector<U>& b)
 {
     if(b.Size() != a.Size())
         throw CSizeError();
@@ -215,7 +236,7 @@ CMathVector<U> operator-(const CMathVector<U> &a, const CMathVector<U> &b)
     return res;
 }
 template <typename U>
-CMathVector<U> operator+(const CMathVector<U> &a, U &value)
+CMathVector<U> operator+(const CMathVector<U>& a, U& value)
 {
     CMathVector<U> res(a.Size());
 
@@ -224,8 +245,9 @@ CMathVector<U> operator+(const CMathVector<U> &a, U &value)
     }
     return res;
 }
+
 template <typename U>
-CMathVector<U> operator-(const CMathVector<U> &a, U &value)
+CMathVector<U> operator-(const CMathVector<U>& a, U& value)
 {
     CMathVector<U> res(a.Size());
 
@@ -234,8 +256,9 @@ CMathVector<U> operator-(const CMathVector<U> &a, U &value)
     }
     return res;
 }
+
 template <typename U>
-CMathVector<U> operator*(const CMathVector<U> &a, U &value)
+CMathVector<U> operator*(const CMathVector<U>& a, U& value)
 {
     CMathVector<U> res(a.Size());
 
@@ -244,8 +267,9 @@ CMathVector<U> operator*(const CMathVector<U> &a, U &value)
     }
     return res;
 }
+
 template <typename U>
-CMathVector<U> operator/(const CMathVector<U> &a, U &value)
+CMathVector<U> operator/(const CMathVector<U>& a, U& value)
 {
     CMathVector<U> res(a.Size());
 
@@ -257,13 +281,14 @@ CMathVector<U> operator/(const CMathVector<U> &a, U &value)
 
 
 template <typename U>
-std::ostream& operator <<(std::ostream& os, const CMathVector<U> &obj)
+std::ostream& operator <<(std::ostream& os, const CMathVector<U>& obj)
 {
     os << "[ ";
     for(int i = 0; i < obj.Size(); i++) {
         os << obj.arr[i] << " ";
     }
     os << "]" << std::endl;
+    return os;
 }
 
 template <typename T>

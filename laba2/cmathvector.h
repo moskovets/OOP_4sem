@@ -12,9 +12,9 @@ public:
 
     CMathVector(size_t n, const T* array);
 
-    CMathVector(const CMathVector<T> &obj);
+    CMathVector(const CMathVector<T>& obj);
 
-    CMathVector(CMathVector<T> &&obj);
+    CMathVector(CMathVector<T>&& obj);
 
     ~CMathVector();
 
@@ -26,11 +26,11 @@ public:
 
     CConstVectorIterator<T> end() const;
 
-    CMathVector<T> &operator= (const CMathVector<T> &obj);
+    CMathVector<T>& operator= (const CMathVector<T>& obj);
 
-    CMathVector<T> &operator+=(const CMathVector<T> &obj);
+    CMathVector<T>& operator+=(const CMathVector<T>& obj);
 
-    CMathVector<T> &operator-=(const CMathVector<T> &obj);
+    CMathVector<T>& operator-=(const CMathVector<T>& obj);
 
     T operator[](unsigned int index) const;
 
@@ -42,9 +42,9 @@ public:
 
     T& GetElement(unsigned int index);
 
-    void SetElement(unsigned int index, const T &value);
+    void SetElement(unsigned int index, const T& value);
 
-    T operator*(const CMathVector<T> &obj);
+    T operator*(const CMathVector<T>& obj);
 
     T operator()(unsigned int index) const;
 
@@ -52,34 +52,34 @@ public:
 
 
     template <typename U>
-    friend bool operator==(const CMathVector<U> &a, const CMathVector<U> &b);
+    friend bool operator==(const CMathVector<U>& a, const CMathVector<U>& b);
 
     template <typename U>
-    friend bool operator<(const CMathVector<U> &a, const CMathVector<U> &b); //TODO
+    friend bool operator<(const CMathVector<U>& a, const CMathVector<U>& b); //TODO
 
     template <typename U>
-    friend CMathVector<U> operator+(const CMathVector<U> &a, const CMathVector<U> &b);
+    friend CMathVector<U> operator+(const CMathVector<U>& a, const CMathVector<U>& b);
 
     template <typename U>
-    friend CMathVector<U> operator-(const CMathVector<U> &a, const CMathVector<U> &b);
+    friend CMathVector<U> operator-(const CMathVector<U>& a, const CMathVector<U>& b);
 
     template <typename U>
-    friend CMathVector<U> operator+(const CMathVector<U> &a, U &value);
+    friend CMathVector<U> operator+(const CMathVector<U>& a, U& value);
 
     template <typename U>
-    friend CMathVector<U> operator-(const CMathVector<U> &a, U &value);
+    friend CMathVector<U> operator-(const CMathVector<U>& a, U& value);
 
     template <typename U>
-    friend CMathVector<U> operator*(const CMathVector<U> &a, U &value);
+    friend CMathVector<U> operator*(const CMathVector<U>& a, U& value);
 
     template <typename U>
-    friend CMathVector<U> operator/(const CMathVector<U> &a, U &value);
+    friend CMathVector<U> operator/(const CMathVector<U>& a, U& value);
 
     template <typename U>
-    friend CMathVector<U> operator-(const CMathVector<U> &a);
+    friend CMathVector<U> operator-(const CMathVector<U>& a);
 
     template <typename U>
-    friend std::ostream& operator<<(std::ostream& os, const CMathVector<U> &obj);
+    friend std::ostream& operator<<(std::ostream& os, const CMathVector<U>& obj);
 
 
 private:
