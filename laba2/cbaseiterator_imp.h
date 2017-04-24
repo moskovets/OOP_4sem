@@ -4,7 +4,7 @@
 #include "cbaseiterator.h"
 
 template <typename T>
-CBaseIterator<T>::CBaseIterator(const CBaseIterator<T> &iter)
+CBaseIterator<T>::CBaseIterator(const CBaseIterator<T>& iter)
 {
     ptr = iter.ptr;
 }
@@ -16,7 +16,7 @@ CBaseIterator<T>::~CBaseIterator()
 }
 
 template <typename T>
-CBaseIterator<T>& CBaseIterator<T>::operator=(const CBaseIterator<T> &iter)
+CBaseIterator<T>& CBaseIterator<T>::operator=(const CBaseIterator<T>& iter)
 {
     if(this != &iter)
         ptr = iter.ptr;
@@ -31,7 +31,7 @@ CBaseIterator<T>& CBaseIterator<T>::operator++()
 }
 
 template <typename T>
-CBaseIterator<T>& CBaseIterator<T>::operator++(int)
+CBaseIterator<T> CBaseIterator<T>::operator++(int)
 {
     CBaseIterator<T> tmp(*this);
     this->operator++();
@@ -46,7 +46,7 @@ CBaseIterator<T>& CBaseIterator<T>::operator--()
 }
 
 template <typename T>
-CBaseIterator<T>& CBaseIterator<T>::operator--(int)
+CBaseIterator<T> CBaseIterator<T>::operator--(int)
 {
     CBaseIterator<T> tmp(*this);
     this->operator--();
@@ -54,13 +54,13 @@ CBaseIterator<T>& CBaseIterator<T>::operator--(int)
 }
 
 template <typename T>
-bool CBaseIterator<T>::operator==(const CBaseIterator &iter)
+bool CBaseIterator<T>::operator==(const CBaseIterator& iter)
 {
     return ptr == iter.ptr;
 }
 
 template <typename T>
-bool CBaseIterator<T>::operator!=(const CBaseIterator &iter)
+bool CBaseIterator<T>::operator!=(const CBaseIterator& iter)
 {
     return ptr != iter.ptr;
 }
