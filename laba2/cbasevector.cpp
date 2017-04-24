@@ -1,9 +1,10 @@
 #include "cbasevector.h"
 
+using namespace myVector::vectorBase;
 
 CBaseVector::CBaseVector() : length(0) {}
 
-CBaseVector::CBaseVector(size_t len) : length(len) {}
+CBaseVector::CBaseVector(std::size_t len) : length(len) {}
 
 CBaseVector::~CBaseVector()
 {

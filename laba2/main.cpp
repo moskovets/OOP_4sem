@@ -1,10 +1,13 @@
+#include "vectorspace.h"
+#include "cexception.h"
+#include <iostream>
+#include <string>
 #include "cmathvector.h"
-#include "cvectoriterator.h"
-
 using namespace std;
-int main(int argc, char *argv[])
+
+int main()
 {
-    CMathVector<int> vect(5);
+    myVector::CMathVector<int> vect(5);// = myVector::CMathVector<int>(5);
     string t = "hey";
 
 //    vect.CMathVector(5);
@@ -22,13 +25,17 @@ int main(int argc, char *argv[])
         cout << ex.what();
     }
 
-    cout << "ok\n";
+        cout << "ok\n";
 
-    CVectorIterator<int> it = vect.begin();
+    myVector::CVectorIterator<int> it(vect.begin());
     cout << "ok\n";
     cout << *it << " ";
     it++;
+   // CVectorIterator<int> it2 = it++;
     cout << *it << " ";
+   // cout << *it2 << " ";
+   // it2 = ++it;
+   // cout << *it2 << endl;
 
     cout << vect;
 

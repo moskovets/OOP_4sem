@@ -24,5 +24,6 @@ HEADERS  += \
     cbaseiterator_imp.h \
     cbaseiterator.h \
     cvectoriterator.h \
-    cvectoriterator_imp.h
+    cvectoriterator_imp.h \
+    vectorspace.h
 

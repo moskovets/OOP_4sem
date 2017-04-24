@@ -1,24 +1,31 @@
 #ifndef CBASEVECTOR_H
 #define CBASEVECTOR_H
-#include "iostream"
-#include "cexception.h"
+#include "vectorspace.h"
 
-class CBaseVector
+namespace myVector
 {
-public:
+    namespace vectorBase
+    {
 
-    explicit CBaseVector();
+        class CBaseVector
+        {
+        public:
 
-    explicit CBaseVector(size_t len);
+            explicit CBaseVector();
 
-    virtual ~CBaseVector();
+            explicit CBaseVector(std::size_t len);
 
-    size_t Size() const;
+            virtual ~CBaseVector();
 
-    bool Empty() const;
+            size_t Size() const;
 
-protected:
-    size_t length;
-};
+            bool Empty() const;
+
+        protected:
+            size_t length;
+        };
+
+    }
+}
 
 #endif // CBASEVECTOR_H
