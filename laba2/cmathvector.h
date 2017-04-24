@@ -24,13 +24,13 @@ namespace myVector
 
         ~CMathVector();
 
-        CVectorIterator<T> begin();
-
-        CVectorIterator<T> end();
-
         CConstVectorIterator<T> begin() const;
 
         CConstVectorIterator<T> end() const;
+
+        CVectorIterator<T> begin();
+
+        CVectorIterator<T> end();
 
         CMathVector<T>& operator= (const CMathVector<T>& obj);
 
