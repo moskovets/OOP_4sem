@@ -174,12 +174,21 @@ namespace myVector
         return arr[index];
     }
 
-    template <typename U>
+/*    template <typename U>
     CMathVector<U> operator-(const CMathVector<U>& a)
     {
         CMathVector<U> res(a.Size());
         for(int i = 0; i < a.Size(); i++) {
             res.arr[i] = -a.arr[i];
+        }
+        return res;
+    }*/
+    template <typename T>
+    CMathVector<T> CMathVector<T>::operator-() const
+    {
+        CMathVector<T> res(this->Size());
+        for(int i = 0; i < this->Size(); i++) {
+            res.arr[i] = -arr[i];
         }
         return res;
     }

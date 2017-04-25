@@ -15,7 +15,8 @@ CBaseException::CBaseException(const char* error)
 {
     int n = strlen(error) + 1;
     msg = new char[n];
-    if(!msg) { return; } //???????????????
+    if(!msg)
+        return;
     strcpy(msg, error);
 }
 
@@ -23,7 +24,8 @@ CBaseException::CBaseException(const char* error, const char* addmsg)
 {
     int n = strlen(error) + strlen(addmsg) + 1;
     msg = new char[n];
-    if(!msg) { return; } //???????????????
+    if(!msg)
+        return;
     strcpy(msg, error);
     strcat(msg, addmsg);
 }
@@ -32,7 +34,8 @@ CBaseException::CBaseException(const std::string& error)
 {
     int n = error.size() + 1;
     msg = new char[n];
-    if(!msg) { return; } //???????????????
+    if(!msg)
+        return;
     strcpy(msg, error.c_str());
 }
 
@@ -40,7 +43,7 @@ CBaseException::CBaseException(const CBaseException& ex)
 {
     msg = new char[strlen(ex.msg) + 1];
     if(!msg)
-        return; //????
+        return;
     strcpy(msg, ex.msg);
 }
 

@@ -56,6 +56,7 @@ namespace myVector
 
         T& operator()(unsigned int index);
 
+        CMathVector<T> operator-() const;
 
         template <typename U>
         friend bool operator==(const CMathVector<U>& a, const CMathVector<U>& b);
@@ -81,8 +82,8 @@ namespace myVector
         template <typename U>
         friend CMathVector<U> operator/(const CMathVector<U>& a, U& value);
 
-        template <typename U>
-        friend CMathVector<U> operator-(const CMathVector<U>& a);
+        //template <typename U>
+        //friend CMathVector<U> operator-(const CMathVector<U>& a);
 
         template <typename U>
         friend std::ostream& operator<<(std::ostream& os, const CMathVector<U>& obj);
