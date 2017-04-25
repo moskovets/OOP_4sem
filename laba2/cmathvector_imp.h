@@ -231,6 +231,21 @@ namespace myVector
     }
 
     template <typename T>
+    CMathVector<T>& CMathVector<T>::operator =(CMathVector<T>&& obj)
+    {
+        if(this != &obj) {
+            delete[] arr;
+
+            arr = obj.arr;
+            this->length = obj.length;
+
+            obj.arr = nullptr;
+            obj.length = 0;
+        }
+        return *this;
+    }
+
+    template <typename T>
     CMathVector<T>& CMathVector<T>::operator +=(const CMathVector<T>& obj)
     {
         if(obj.Size() != this->Size())

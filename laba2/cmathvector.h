@@ -22,7 +22,7 @@ namespace myVector
 
         CMathVector(CMathVector<T>&& obj);
 
-        ~CMathVector();
+        virtual ~CMathVector();
 
         CConstVectorIterator<T> begin() const;
 
@@ -33,6 +33,8 @@ namespace myVector
         CVectorIterator<T> end();
 
         CMathVector<T>& operator= (const CMathVector<T>& obj);
+
+        CMathVector<T>& operator= (CMathVector<T>&& obj);
 
         CMathVector<T>& operator+=(const CMathVector<T>& obj);
 

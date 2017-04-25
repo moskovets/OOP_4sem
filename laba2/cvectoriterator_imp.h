@@ -43,7 +43,7 @@ namespace myVector
     }
 
     template <typename T>
-    CConstVectorIterator<T>::CConstVectorIterator(T* p)
+    CConstVectorIterator<T>::CConstVectorIterator(const T *p)
     {
         this->ptr = p;
     }

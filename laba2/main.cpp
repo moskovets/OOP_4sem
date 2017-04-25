@@ -49,11 +49,10 @@ int main()
 
             cout << "\n";
 
-        myVector::CVectorIterator<int> it = vect.begin();
+        myVector::CConstVectorIterator<int> it = vect.begin();
         cout << " ok\n";
         cout << *it << " ";
         it++;
-       // CVectorIterator<int> it2 = it++;
         cout << *it << " ";
        // cout << *it2 << " ";
        // it2 = ++it;
@@ -61,7 +60,9 @@ int main()
 
         cout << vect;
 
-        //vect = -vect;
+        vect = -vect;
+        cout << vect;
+        vect = -vect;
         cout << -vect;
         cout << +vect;
        // vect += vect;
@@ -69,13 +70,17 @@ int main()
 
         cout << vect + vect;
 
-        cout << vect.GetAbsoluteValue();
+        cout << vect.GetAbsoluteValue() << " ";
 
         cout << vect.GetElement(3);
 
         vect += vect;
 
         cout << vect;
+
+        for(it = vect.begin(); it != vect.end(); it++) {
+            cout << *it << " ";
+        }
     }
     catch (CBaseException ex) {
         cout << ex.what();

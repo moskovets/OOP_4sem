@@ -35,7 +35,7 @@ namespace myVector
 
         const T operator->() const;
 
-        CConstVectorIterator(T* p);
+        CConstVectorIterator(const T* p);
     };
 
 }
