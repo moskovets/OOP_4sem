@@ -49,7 +49,7 @@ int main()
 
             cout << "\n";
 
-        myVector::CConstVectorIterator<int> it = vect.begin();
+        myVector::CVectorIterator<int> it = vect.begin();
         cout << " ok\n";
         cout << *it << " ";
         it++;

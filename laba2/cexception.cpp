@@ -56,18 +56,18 @@ CMemoryError::CMemoryError() : CBaseException(defaultMsg) {}
 
 CMemoryError::CMemoryError(char* addmsg) : CBaseException(defaultMsg, addmsg) {}
 
-CMemoryError::CMemoryError(std::string& addmsg) : CBaseException(defaultMsg, addmsg.c_str()) {}
+CMemoryError::CMemoryError(const std::string &addmsg) : CBaseException(defaultMsg, addmsg.c_str()) {}
 
 
 CRangeError::CRangeError() : CBaseException(defaultMsg) {}
 
 CRangeError::CRangeError(char* addmsg) : CBaseException(defaultMsg, addmsg) {}
 
-CRangeError::CRangeError(std::string& addmsg) : CBaseException(defaultMsg, addmsg.c_str()) {}
+CRangeError::CRangeError(const std::string& addmsg) : CBaseException(defaultMsg, addmsg.c_str()) {}
 
 
 CSizeError::CSizeError() : CBaseException(defaultMsg) {}
 
 CSizeError::CSizeError(char* addmsg) : CBaseException(defaultMsg, addmsg) {}
 
-CSizeError::CSizeError(std::string& addmsg) : CBaseException(defaultMsg, addmsg.c_str()) {}
+CSizeError::CSizeError(const std::string &addmsg) : CBaseException(defaultMsg, addmsg.c_str()) {}

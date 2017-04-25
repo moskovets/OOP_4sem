@@ -36,7 +36,7 @@ public:
 
     explicit CMemoryError(char* addmsg);
 
-    explicit CMemoryError(std::string& addmsg);
+    explicit CMemoryError(const std::string& addmsg);
 
 private:
 
@@ -53,7 +53,7 @@ public:
 
     explicit CRangeError(char* addmsg);
 
-    explicit CRangeError(std::string& addmsg);
+    explicit CRangeError(const std::string& addmsg);
 
 private:
 
@@ -69,7 +69,7 @@ public:
 
     explicit CSizeError(char *addmsg);
 
-    explicit CSizeError(std::string& addmsg);
+    explicit CSizeError(const std::string& addmsg);
 
 private:
 
