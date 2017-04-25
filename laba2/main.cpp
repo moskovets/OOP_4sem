@@ -23,6 +23,18 @@ int main()
         vect[2] = 3;
         vect[3] = 4;
         vect[4] = 5;
+        cout << vect.GetAbsoluteValue() << "\n";
+        cout << vect2.GetAbsoluteValue() << "\n";
+        if(vect2 == vect) {
+            cout << "er! ";
+        }
+        if(vect2 < vect) {
+            cout << "< ";
+        }
+        if(vect2 <= vect) {
+            cout << "<= ";
+        }
+
         vect2 = vect;
         cout << vect2;
 
@@ -51,6 +63,7 @@ int main()
 
         //vect = -vect;
         cout << -vect;
+        cout << +vect;
        // vect += vect;
 
 

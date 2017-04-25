@@ -138,6 +138,27 @@ namespace myVector
         return a.GetAbsoluteValue() < b.GetAbsoluteValue();
     }
 
+    template <typename U>
+    bool operator>(const CMathVector<U>& a, const CMathVector<U>& b)
+    {
+        if(a.Size() != b.Size())
+            throw CSizeError();
+
+        return a.GetAbsoluteValue() > b.GetAbsoluteValue();
+    }
+
+    template <typename U>
+    bool operator>=(const CMathVector<U>& a, const CMathVector<U>& b)
+    {
+        return !(a < b);
+    }
+
+    template <typename U>
+    bool operator<=(const CMathVector<U>& a, const CMathVector<U>& b)
+    {
+        return !(a > b);
+    }
+
     template <typename T>
     T& CMathVector<T>::operator[](unsigned int index)
     {
@@ -174,22 +195,20 @@ namespace myVector
         return arr[index];
     }
 
-/*    template <typename U>
-    CMathVector<U> operator-(const CMathVector<U>& a)
-    {
-        CMathVector<U> res(a.Size());
-        for(int i = 0; i < a.Size(); i++) {
-            res.arr[i] = -a.arr[i];
-        }
-        return res;
-    }*/
     template <typename T>
-    CMathVector<T> CMathVector<T>::operator-() const
+    CMathVector<T> CMathVector<T>::operator -() const
     {
         CMathVector<T> res(this->Size());
         for(int i = 0; i < this->Size(); i++) {
             res.arr[i] = -arr[i];
         }
+        return res;
+    }
+
+    template <typename T>
+    CMathVector<T> CMathVector<T>::operator +() const
+    {
+        CMathVector<T> res(*this);
         return res;
     }
 
