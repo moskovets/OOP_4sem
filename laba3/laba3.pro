@@ -15,10 +15,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     cpoint.cpp \
-    cline.cpp
+    cline.cpp \
+    cexception.cpp
 
 HEADERS  += mainwindow.h \
     cpoint.h \
-    cline.h
+    cline.h \
+    cexception.h
 
 FORMS    += mainwindow.ui
