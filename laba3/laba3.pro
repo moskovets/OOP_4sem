@@ -16,11 +16,15 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     cpoint.cpp \
     cline.cpp \
-    cexception.cpp
+    cexception.cpp \
+    cbasevector.cpp
 
 HEADERS  += mainwindow.h \
     cpoint.h \
     cline.h \
-    cexception.h
+    cexception.h \
+    cbasevector.h \
+    cvector.h \
+    cvector_imp.h
 
 FORMS    += mainwindow.ui

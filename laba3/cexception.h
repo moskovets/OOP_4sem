@@ -3,6 +3,9 @@
 #include <exception>
 #include <cstring>
 #include <string>
+#include <stdio.h>
+#include <iostream>
+
 #include "QDebug"
 
 class CBaseException : public std::exception
