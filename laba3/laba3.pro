@@ -14,9 +14,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    cpoint.cpp
+    cpoint.cpp \
+    cline.cpp
 
 HEADERS  += mainwindow.h \
-    cpoint.h
+    cpoint.h \
+    cline.h
 
 FORMS    += mainwindow.ui
