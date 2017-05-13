@@ -20,8 +20,6 @@ private:
     CPoint* point1 = nullptr;
     CPoint* point2 = nullptr;
 
-
-
 };
 
 #endif // CLINE_H

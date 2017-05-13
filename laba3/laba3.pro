@@ -25,6 +25,8 @@ HEADERS  += mainwindow.h \
     cexception.h \
     cbasevector.h \
     cvector.h \
-    cvector_imp.h
+    cvector_imp.h \
+    cmatrix.h \
+    cmatrix_imp.h
 
 FORMS    += mainwindow.ui
