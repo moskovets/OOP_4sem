@@ -2,6 +2,7 @@
 #define CTRANSFORMMATRIX_H
 
 #include "cmatrix.h"
+#include "cvector.h"
 
 class CTransformMatrix : public CMatrix<double>
 {
@@ -19,6 +20,12 @@ public:
     CTransformMatrix& operator= (const CTransformMatrix& obj);
 
     CTransformMatrix& operator= (CTransformMatrix&& obj);
+
+    friend CTransformMatrix operator*(const CTransformMatrix& a, const CTransformMatrix& b);
+
+    //friend CVector<double> operator*(const CVector<double>& vect, const CTransformMatrix& matr);
+
+    friend CVector<double> operator*(const CTransformMatrix& matr, const CVector<double>& vect);
 
 private:
 

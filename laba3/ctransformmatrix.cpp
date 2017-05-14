@@ -64,3 +64,54 @@ CTransformMatrix &CTransformMatrix::operator=(CTransformMatrix &&obj)
     }
     return *this;
 }
+
+/*CVector<double> operator*(const CVector<double> &vect, const CTransformMatrix &matr)
+{
+    if(vect.Size() != matr.n_d)
+        throw CSizeError();
+
+    CVector<double> res(matr.n_d);
+
+    for(int i = 0; i < matr.n_d; i++) {
+        for(int j = 0; j < matr.n_d; j++) {
+            res[i] += matr[j][i] * vect[j];
+        }
+    }
+
+    return res;
+}*/
+
+CVector<double> operator*(const CTransformMatrix &matr, const CVector<double> &vect)
+{
+    if(vect.Size() != matr.n_d)
+        throw CSizeError();
+
+    CVector<double> res(matr.n_d);
+
+    for(int i = 0; i < matr.n_d; i++) {
+        for(int j = 0; j < matr.n_d; j++) {
+            res[i] += matr[i][j] * vect[j];
+        }
+    }
+
+    return res;
+}
+
+CTransformMatrix operator*(const CTransformMatrix &a, const CTransformMatrix &b)
+{
+    if(b.n_d != a.n_d)
+        throw CSizeError();
+
+    CTransformMatrix res(a.n_d);
+
+    for(int i = 0; i < a.n_d; i++) {
+        for(int j = 0; j < a.n_d; j++) {
+            res[i][j] = 0;
+            for(int k = 0; k < a.n_d; k++) {
+                res[i][j] += a[i][k] * b[k][j];
+            }
+        }
+    }
+
+    return res;
+}
