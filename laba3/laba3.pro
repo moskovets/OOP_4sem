@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     cpoint.cpp \
     cline.cpp \
     cexception.cpp \
-    cbasevector.cpp
+    cbasevector.cpp \
+    ctransformmatrix.cpp
 
 HEADERS  += mainwindow.h \
     cpoint.h \
@@ -27,6 +28,7 @@ HEADERS  += mainwindow.h \
     cvector.h \
     cvector_imp.h \
     cmatrix.h \
-    cmatrix_imp.h
+    cmatrix_imp.h \
+    ctransformmatrix.h
 
 FORMS    += mainwindow.ui

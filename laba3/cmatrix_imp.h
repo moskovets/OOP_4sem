@@ -36,6 +36,7 @@ CMatrix<T>::CMatrix(std::size_t n, std::size_t m, const T* array) : CBaseVector(
 template <typename T>
 CMatrix<T>::CMatrix(const CMatrix<T>& obj) : CBaseVector(obj.Size())
 {
+    qDebug() << "copy & CMatrix";
     try {
         arr = new T[obj.Size()];
     }
@@ -135,6 +136,7 @@ T CMatrix<T>::operator()(unsigned int i, unsigned int j) const
 template <typename T>
 CMatrix<T>& CMatrix<T>::operator =(const CMatrix<T>& obj)
 {
+    qDebug() << "= CMatrix";
     T* new_arr = nullptr;
     try {
         new_arr = new T[obj.Size()];

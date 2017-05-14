@@ -66,7 +66,7 @@ protected:
         T* arr_row = nullptr;
     };
 
-private:
+protected:
 
     std::size_t n;
     std::size_t m;
