@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "cbutton.h"
+#define FLOOR_NUMBERS 5
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +19,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    CButton* buttons[FLOOR_NUMBERS];
+
 };
 
 #endif // MAINWINDOW_H
