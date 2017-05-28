@@ -14,9 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    cbutton.cpp
+    cbutton.cpp \
+    cdoor.cpp
 
 HEADERS  += mainwindow.h \
-    cbutton.h
+    cbutton.h \
+    cdoor.h \
+    times.h
 
 FORMS    += mainwindow.ui
