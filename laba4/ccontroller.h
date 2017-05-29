@@ -17,28 +17,8 @@ class CController : public QWidget
 
 public:
 
-    explicit CController(QWidget *parent = 0) : QWidget(parent)
-    {
-        layout = new QVBoxLayout;
-        this->setFixedSize(200, 300);
-        this->setLayout(layout);
-        for(int i = 0; i < FLOOR_NUMBERS; i++) {
-            buttons[i] = new CButton;
-            layout->addWidget(dynamic_cast<QPushButton*>(buttons[i]));
-            buttons[i]->SetNumberFloor(i);
-            buttons[i]->setText(QString::number(i));
-            targetArray[i] = false;
-            QObject::connect(buttons[i], SIGNAL(floorRequest(int)), this, SLOT(slotAddNewFloor(int)));
-        }
-
-    }
-    ~CController()
-    {
-        for(int i = 0; i < FLOOR_NUMBERS; i++) {
-            delete buttons[i];
-        }
-        delete layout;
-    }
+    explicit CController(QWidget *parent = 0);
+    ~CController();
 
 signals:
 
@@ -46,56 +26,16 @@ signals:
 
 public slots:
 
-    void slotChangeCurrentFloor(int floor, Direction d) 
-    {
-        currentFloor = floor;
-        direct = d;
-    }
-
-    void slotAchieveFloor(int floor, Direction d)
-    {
-        if(state == BUSY) {
-            currentFloor = floor;
-            direct = d;
-            targetArray[floor] = false;
-            if(GetNewTarget(floor)) {
-                emit SendTarget(floor);
-            }
-            else {
-                state = NO_TARGET;
-            }
-        }
-    }
+    void slotChangeCurrentFloor(int floor, Direction d);
+    void slotAchieveFloor(int floor, Direction d);
     
 private slots:
 
-    void slotAddNewFloor(int floor)
-    {
-        state = BUSY;
-        targetArray[floor] = true;
-        GetNewTarget(floor);
-        emit SendTarget(floor);
-    }
+    void slotAddNewFloor(int floor);
 
 private:
-    bool GetNewTarget(int &newFloor)
-    {
-        int step = direct == 0 ? -1 : direct;
-        for(int i = currentFloor; i < FLOOR_NUMBERS && i >= 0; i += step) {
-            if(targetArray[i])  {
-                newFloor = i;
-                return true;
-            }
-        }
-        step *= -1;
-        for(int i = currentFloor; i < FLOOR_NUMBERS && i >= 0; i += step) {
-            if(targetArray[i])  {
-                newFloor = i;
-                return true;
-            }
-        }
-        return false;
-    }
+
+    bool GetNewTarget(int &newFloor);
 
     bool         targetArray[FLOOR_NUMBERS];
     CButton*     buttons[FLOOR_NUMBERS];
