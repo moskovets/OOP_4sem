@@ -2,8 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "cbutton.h"
-#define FLOOR_NUMBERS 5
+#include "clift.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,8 +18,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    CButton* buttons[FLOOR_NUMBERS];
-
+    CLift lift;
+    QVBoxLayout *layout;
 };
 
 #endif // MAINWINDOW_H

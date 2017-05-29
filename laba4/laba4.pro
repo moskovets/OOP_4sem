@@ -17,13 +17,15 @@ SOURCES += main.cpp\
     cbutton.cpp \
     cdoor.cpp \
     ccabin.cpp \
-    ccontroller.cpp
+    ccontroller.cpp \
+    clift.cpp
 
 HEADERS  += mainwindow.h \
     cbutton.h \
     cdoor.h \
     times.h \
     ccabin.h \
-    ccontroller.h
+    ccontroller.h \
+    clift.h
 
 FORMS    += mainwindow.ui
