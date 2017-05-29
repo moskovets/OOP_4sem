@@ -33,7 +33,6 @@ private:
 
     int       currentFloor = 0;
     int       targetFloor;
-    bool      flagTarget;
     Direction direct;
     StateCabin state;
     CDoor     door;

@@ -5,7 +5,6 @@ CCabin::CCabin(QObject *parent)
     state = FREE;
     currentFloor = 0;
     targetFloor = 0;
-    flagTarget = false;
     direct = NO_DIRECTION;
     QObject::connect(&door, SIGNAL(DoorIsClosed()), this, SLOT(slotMoving()));
     QObject::connect(&timerMoveFloor, SIGNAL(timeout()), this, SLOT(slotMoving()));
@@ -40,7 +39,6 @@ void CCabin::slotMoving()
 void CCabin::slotFree()
 {
 //    qDebug() << "slotFree";
-    flagTarget = false;
     state = FREE;
     timerMoveFloor.stop();
     emit FloorTargetAchieved(currentFloor, direct);
@@ -52,7 +50,6 @@ void CCabin::slotBusy(int floor)
 {
 //    qDebug() << "slotBusy";
     state = BUSY;
-    flagTarget = true;
     targetFloor = floor;
     if(currentFloor == targetFloor) {
         emit FloorAchieved();
