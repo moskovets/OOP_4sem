@@ -13,64 +13,25 @@ class CDoor : public QObject
         OPENING,
         CLOSING
     };
+
 public:
-    explicit CDoor()
-    {
-        state = CLOSE;
-        QObject::connect(this, SIGNAL(OpenDoor()), this, SLOT(slotOpening()));
-        QObject::connect(&timerOpen,    SIGNAL(QTimer::timeout()), this, SLOT(CDoor::slotOpen()));
-        QObject::connect(&timerClose,   SIGNAL(QTimer::timeout()), this, SLOT(CDoor::slotClose()));
-        QObject::connect(&timerWaitOpen,SIGNAL(QTimer::timeout()), this, SLOT(CDoor::slotClosing()));
-    }
+
+    explicit CDoor();
+
 signals:
+
     void DoorIsClosed();
     void OpenDoor();
+
 public slots:
 
-    void slotOpen()
-    {
-        if(state == OPENING) {
-            state = OPEN;
-            qDebug() << "doors opened";
-            timerWaitOpen.start(TIME_DOOR_WAIT);
-        }
-    }
-
-    void slotClose()
-    {
-        if(state == CLOSING) {
-            state = CLOSE;
-            qDebug() << "doors closed";
-            emit DoorIsClosed();
-        }
-    }
+    void slotOpen();
+    void slotClose();
 
 private slots:
 
-    void slotOpening()
-    {
-        if(state == CLOSE) {
-            state = OPENING;
-            qDebug() << "doors opening";
-            timerOpen.start(TIME_DOOR);
-        }
-        if(state == CLOSING) {
-            state = OPENING;
-            qDebug() << "doors opening";
-            int t = timerClose.remainingTime();
-            timerClose.stop();
-            timerOpen.start(TIME_DOOR - t);
-        }
-    }
-
-    void slotClosing()
-    {
-        if(state == OPEN) {
-            state = CLOSING;
-            qDebug() << "doors are closing";
-            timerClose.start(TIME_DOOR);
-        }
-    }
+    void slotOpening();
+    void slotClosing();
 
 private:
 
