@@ -34,9 +34,11 @@ void CController::slotChangeCurrentFloor(int floor, Direction d)
 void CController::slotAchieveFloor(int floor, Direction d)
 {
     if(state == BUSY) {
+    qDebug() << "slotAchieveFloor_controller-------------";
         currentFloor = floor;
         direct = d;
         targetArray[floor] = false;
+        emit buttons[floor]->resetButton();
         if(GetNewTarget(floor)) {
             emit SendTarget(floor);
         }
@@ -48,6 +50,7 @@ void CController::slotAchieveFloor(int floor, Direction d)
 
 void CController::slotAddNewFloor(int floor)
 {
+    qDebug() << "slotAddNewFloor";
     state = BUSY;
     targetArray[floor] = true;
     GetNewTarget(floor);

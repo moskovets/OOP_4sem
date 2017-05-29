@@ -22,7 +22,6 @@ signals:
 
     void FloorVisited(int floor, Direction d); // union?
     void FloorTargetAchieved(int floor, Direction d); // union?
-    void Move();
 
 public slots:
 
@@ -43,6 +42,7 @@ private:
 signals:
 
     void FloorAchieved();
+    void Move();
 
 };
 

@@ -22,7 +22,7 @@ public:
 
 signals:
 
-    void SendTarget(int floor);
+    void SendTarget(int floor);// { qDebug() << "he;;p"; }
 
 public slots:
 

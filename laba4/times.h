@@ -4,10 +4,10 @@
 #include <QTimer>
 #include <QDebug>
 
-#define TIME_DOOR 100
-#define TIME_DOOR_WAIT 10
-#define TIME_MOVING_FLOOR 20
-#define FLOOR_NUMBERS 5
+#define TIME_DOOR 300
+#define TIME_DOOR_WAIT 300
+#define TIME_MOVING_FLOOR 1000
+#define FLOOR_NUMBERS 8
 
 enum Direction {
     UP = 1,

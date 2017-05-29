@@ -6,7 +6,7 @@ CButton::CButton(QWidget *parent) : QPushButton(parent)
     state = RELEASED;
     floorNumber = 0;
     QObject::connect(this, SIGNAL(clicked()), this, SLOT(slotPressed()));
-    QObject::connect(this, SIGNAL(resetButton()), this, SLOT(slotPressed()));
+    QObject::connect(this, SIGNAL(resetButton()), this, SLOT(slotReleased()));
 
 }
 

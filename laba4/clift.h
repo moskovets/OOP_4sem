@@ -12,12 +12,17 @@ class CLift : public QObject
 public:
     explicit CLift(QObject *parent = 0) : QObject(parent)
     {
-
+        QObject::connect(&cabina,  SIGNAL(FloorVisited(int, Direction)),
+                         &control, SLOT(slotChangeCurrentFloor(int, Direction)));
+        QObject::connect(&cabina,  SIGNAL(FloorTargetAchieved(int, Direction)),
+                         &control, SLOT(slotAchieveFloor(int, Direction)));
+        QObject::connect(&control, SIGNAL(SendTarget(int)),
+                         &cabina,  SLOT(slotBusy(int)));
     }
 
     QWidget* GetWidget()
     {
-        return &panel;
+        return &control;
     }
 
 signals:
@@ -25,7 +30,7 @@ signals:
 public slots:
 
 private:
-    CController panel;
+    CController control;
     CCabin      cabina;
 };
 
