@@ -15,7 +15,6 @@ CCabin::CCabin(QObject *parent)
 
 void CCabin::slotMoving()
 {
-    //qDebug() << bool(state == FREE);
     if(state == MOVING || state == BUSY)  {
         state = MOVING;
         qDebug() << "move, floor" << currentFloor;
@@ -40,7 +39,7 @@ void CCabin::slotMoving()
 
 void CCabin::slotFree()
 {
-    qDebug() << "slotFree";
+//    qDebug() << "slotFree";
     flagTarget = false;
     state = FREE;
     timerMoveFloor.stop();
@@ -51,7 +50,7 @@ void CCabin::slotFree()
 
 void CCabin::slotBusy(int floor)
 {
-    qDebug() << "slotBusy";
+//    qDebug() << "slotBusy";
     state = BUSY;
     flagTarget = true;
     targetFloor = floor;

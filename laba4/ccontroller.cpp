@@ -4,7 +4,6 @@
 CController::CController(QWidget *parent) : QWidget(parent)
 {
     layout = new QVBoxLayout;
-    this->setFixedSize(200, 300);
     this->setLayout(layout);
     for(int i = 0; i < FLOOR_NUMBERS; i++) {
         buttons[i] = new CButton;
@@ -34,7 +33,7 @@ void CController::slotChangeCurrentFloor(int floor, Direction d)
 void CController::slotAchieveFloor(int floor, Direction d)
 {
     if(state == BUSY) {
-    qDebug() << "slotAchieveFloor_controller-------------";
+    qDebug() << "Stop on floor" << floor << "-------------";
         currentFloor = floor;
         direct = d;
         targetArray[floor] = false;
@@ -50,7 +49,7 @@ void CController::slotAchieveFloor(int floor, Direction d)
 
 void CController::slotAddNewFloor(int floor)
 {
-    qDebug() << "slotAddNewFloor";
+//    qDebug() << "slotAddNewFloor";
     state = BUSY;
     targetArray[floor] = true;
     GetNewTarget(floor);
