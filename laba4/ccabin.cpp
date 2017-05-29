@@ -16,6 +16,7 @@ CCabin::CCabin(QObject *parent)
 void CCabin::slotMoving()
 {
     if(state == FREE || state == BUSY)  {
+        qDebug() << "move, floor" << currentFloor;
         if(currentFloor == targetFloor) {
             emit FloorAchieved();
         }

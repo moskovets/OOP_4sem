@@ -23,7 +23,7 @@ CButton::~CButton()
 void CButton::slotPressed()
 {
     if(state == RELEASED) {
-        qDebug() << "press" << floorNumber;
+        //qDebug() << "press" << floorNumber;
         state = PRESSED;
         this->setEnabled(false);
         emit floorRequest(floorNumber);
