@@ -5,9 +5,9 @@ CDoor::CDoor()
 {
     state = CLOSE;
     QObject::connect(this, SIGNAL(OpenDoor()), this, SLOT(slotOpening()));
-    QObject::connect(&timerOpen,    SIGNAL(QTimer::timeout()), this, SLOT(CDoor::slotOpen()));
-    QObject::connect(&timerClose,   SIGNAL(QTimer::timeout()), this, SLOT(CDoor::slotClose()));
-    QObject::connect(&timerWaitOpen,SIGNAL(QTimer::timeout()), this, SLOT(CDoor::slotClosing()));
+    QObject::connect(&timerOpen,    SIGNAL(timeout()), this, SLOT(slotOpen()));
+    QObject::connect(&timerClose,   SIGNAL(timeout()), this, SLOT(slotClose()));
+    QObject::connect(&timerWaitOpen,SIGNAL(timeout()), this, SLOT(slotClosing()));
 }
 
 void CDoor::slotOpen()

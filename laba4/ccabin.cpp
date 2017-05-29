@@ -7,8 +7,8 @@ CCabin::CCabin(QObject *parent)
     targetFloor = 0;
     flagTarget = false;
     direct = NO_DIRECTION;
-    QObject::connect(&door, SIGNAL(CDoor::DoorIsClosed()), this, SLOT(slotOpening()));
-    QObject::connect(&timerMoveFloor, SIGNAL(QTimer::timeout()), this, SLOT(slotMoving()));
+    QObject::connect(&door, SIGNAL(DoorIsClosed()), this, SLOT(slotMoving()));
+    QObject::connect(&timerMoveFloor, SIGNAL(timeout()), this, SLOT(slotMoving()));
     QObject::connect(this, SIGNAL(FloorAchieved()), this, SLOT(slotFree()));
     QObject::connect(this, SIGNAL(Move()), this, SLOT(slotMoving()));
 }
